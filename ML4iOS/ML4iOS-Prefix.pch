@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'ML4iOS' target in the 'ML4iOS' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif
