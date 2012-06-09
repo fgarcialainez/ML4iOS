@@ -1,8 +1,8 @@
 # ML4iOS
 
 The idea of this project is to create a very simple open source
-library to help developers to integrate Machine Learning on any 
-iOS application.
+library to help iOS developers integrate machine learning into any iOS 
+application.
 
 To implement this library I have used a powerful and innovative
 platform named [BigML](https://bigml.com). This platform provides 
@@ -51,8 +51,8 @@ for an invitation on their web site.
 Please feel free to contribute to this library. My idea was 
 to publish it under Apache License in order to allow that anybody
 interested can contribute to the project. I am sure that it could 
-help to a lot of iOS developers that want to integrate Machine
-Learning functionalities on their applications.
+help iOS developers that want to integrate machine learning functionalities 
+on their applications.
 
 The recommended steps to follow for any contribution are:
 
