@@ -25,11 +25,11 @@
 #pragma mark URL Definitions
 
 //BigML API URLs
-#define BIGML_IO_BASE_URL @"https://bigml.io/andromeda"
-#define BIGML_IO_DATASOURCE_URL [NSString stringWithFormat:@"%@/source", BIGML_IO_BASE_URL]
-#define BIGML_IO_DATASET_URL [NSString stringWithFormat:@"%@/dataset", BIGML_IO_BASE_URL]
-#define BIGML_IO_MODEL_URL [NSString stringWithFormat:@"%@/model", BIGML_IO_BASE_URL]
-#define BIGML_IO_PREDICTION_URL [NSString stringWithFormat:@"%@/prediction", BIGML_IO_BASE_URL]
+//#define BIGML_IO_BASE_URL @"https://bigml.io/andromeda"
+#define BIGML_IO_DATASOURCE_URL [NSString stringWithFormat:@"%@/source", apiBaseURL]
+#define BIGML_IO_DATASET_URL [NSString stringWithFormat:@"%@/dataset", apiBaseURL]
+#define BIGML_IO_MODEL_URL [NSString stringWithFormat:@"%@/model", apiBaseURL]
+#define BIGML_IO_PREDICTION_URL [NSString stringWithFormat:@"%@/prediction", apiBaseURL]
 
 #pragma mark -
 
@@ -199,7 +199,7 @@
 
 #pragma mark -
 
--(HTTPCommsManager*)initWithUsername:(NSString*)username key:(NSString*)key
+-(HTTPCommsManager*)initWithUsername:(NSString*)username key:(NSString*)key developmentMode:(BOOL)devMode
 {
     if([username length] > 0 && [key length] > 0)
     {
@@ -208,7 +208,13 @@
         if(self) {
             apiUsername = [[NSString alloc]initWithString:username];
             apiKey = [[NSString alloc]initWithString:key];
+            developmentMode = devMode;
             
+            if(developmentMode)
+                apiBaseURL = [[NSString stringWithString:@"https://bigml.io/dev/andromeda"]retain];
+            else
+                apiBaseURL = [[NSString stringWithString:@"https://bigml.io/andromeda"]retain];
+                
             authToken = [[NSString alloc]initWithFormat:@"?username=%@;api_key=%@;", apiUsername, apiKey];
         }
     }
@@ -221,6 +227,7 @@
     [apiKey release];
     [apiUsername release];
     [authToken release];
+    [apiBaseURL release];
     [super dealloc];
 }
 

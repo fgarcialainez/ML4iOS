@@ -62,9 +62,10 @@
  * Initializes the library with the BigML username and API key 
  * @param username The BigML username
  * @param key The BigML.io API key
+ * @param devMode true if we want to use the library on development mode, else false
  * @return The created BigMLAPILibrary object
  */
--(ML4iOS*)initWithUsername:(NSString*)username key:(NSString*)key;
+-(ML4iOS*)initWithUsername:(NSString*)username key:(NSString*)key developmentMode:(BOOL)devMode;
 
 /**
  * Cancel all asynchronous operations in the queue

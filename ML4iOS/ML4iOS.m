@@ -98,14 +98,14 @@
 
 #pragma mark -
 
--(ML4iOS*)initWithUsername:(NSString*)username key:(NSString*)key
+-(ML4iOS*)initWithUsername:(NSString*)username key:(NSString*)key developmentMode:(BOOL)devMode
 {
     self = [super init];
     
     if(self)
     {
         operationQueue = [[NSOperationQueue alloc]init];
-        commsManager = [[HTTPCommsManager alloc]initWithUsername:username key:key];
+        commsManager = [[HTTPCommsManager alloc]initWithUsername:username key:key developmentMode:devMode];
     }
     
     return self;

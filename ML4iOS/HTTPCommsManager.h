@@ -37,6 +37,17 @@
     NSString* apiKey;
     
     /**
+     * BigML.io Development Mode 
+     * @see http://blog.bigml.com/2012/07/04/introducing-bigmls-free-machine-learning-sandbox/
+     */
+    BOOL developmentMode;
+    
+    /**
+     * BigML.io Base URL
+     */
+    NSString* apiBaseURL;
+    
+    /**
      * Token created from apiUsername and apiKey and used to authenticate any HTTP requests
      */
     NSString* authToken;
@@ -52,9 +63,10 @@
  * Initializes the object with the BigML username and API key 
  * @param username The BigML username
  * @param key The BigML.io API key
+ * @param devMode true if we are working on development mode, else false
  * @return The created BigMLCommsManager object
  */
--(HTTPCommsManager*)initWithUsername:(NSString*)username key:(NSString*)key;
+-(HTTPCommsManager*)initWithUsername:(NSString*)username key:(NSString*)key developmentMode:(BOOL)devMode;
 
 //*******************************************************************************
 //**************************  DATA SOURCES  *************************************

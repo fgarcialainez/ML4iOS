@@ -30,7 +30,7 @@
     [super setUp];
     
     // Set-up code here.
-    apiLibrary = [[ML4iOS alloc]initWithUsername:@"YOUR_BIGML_USERNAME" key:@"YOUR_BIGML_API_KEY"];
+    apiLibrary = [[ML4iOS alloc]initWithUsername:@"YOUR_BIGML_USERNAME" key:@"YOUR_BIGML_API_KEY" developmentMode:NO];
     [apiLibrary setDelegate:self];
 }
 
