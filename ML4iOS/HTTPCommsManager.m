@@ -25,7 +25,6 @@
 #pragma mark URL Definitions
 
 //BigML API URLs
-//#define BIGML_IO_BASE_URL @"https://bigml.io/andromeda"
 #define BIGML_IO_DATASOURCE_URL [NSString stringWithFormat:@"%@/source", apiBaseURL]
 #define BIGML_IO_DATASET_URL [NSString stringWithFormat:@"%@/dataset", apiBaseURL]
 #define BIGML_IO_MODEL_URL [NSString stringWithFormat:@"%@/model", apiBaseURL]
