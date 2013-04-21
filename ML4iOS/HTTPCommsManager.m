@@ -210,9 +210,9 @@
             developmentMode = devMode;
             
             if(developmentMode)
-                apiBaseURL = [[NSString stringWithString:@"https://bigml.io/dev/andromeda"]retain];
+                apiBaseURL = [[NSString alloc] initWithString:@"https://bigml.io/dev/andromeda"];
             else
-                apiBaseURL = [[NSString stringWithString:@"https://bigml.io/andromeda"]retain];
+                apiBaseURL = [[NSString alloc] initWithString:@"https://bigml.io/andromeda"];
                 
             authToken = [[NSString alloc]initWithFormat:@"?username=%@;api_key=%@;", apiUsername, apiKey];
         }
@@ -253,7 +253,7 @@
     NSMutableData *postbody = [NSMutableData data];
     [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [postbody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"userfile\"; filename=\"%@\"\r\n", name] dataUsingEncoding:NSUTF8StringEncoding]];
-    [postbody appendData:[[NSString stringWithString:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postbody appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     [postbody appendData:[NSData dataWithContentsOfFile:filePath]];
     [postbody appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [request setHTTPBody:postbody];

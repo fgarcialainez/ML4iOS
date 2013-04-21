@@ -22,6 +22,7 @@
 #import "ML4iOS.h"
 #import "HTTPCommsManager.h"
 #import "Constants.h"
+#import "LocalPredictiveModel.h"
 
 /**
  * Interface that contains private methods
@@ -784,6 +785,18 @@
         ready = [[[prediction objectForKey:@"status"]objectForKey:@"code"]intValue] == FINISHED;
     
     [delegate predictionIsReady:ready];
+}
+
+//*******************************************************************************
+//*************************** LOCAL PREDICTIONS  ********************************
+//*******************************************************************************
+
+#pragma mark -
+#pragma mark Local Predictions
+
+-(NSDictionary*)createLocalPredictionWithJSONModelSync:(NSDictionary*)jsonModel arguments:(NSString*)args argsByName:(BOOL)byName
+{
+    return [LocalPredictiveModel predictWithJSONModel:jsonModel arguments:args argsByName:NO];
 }
 
 @end

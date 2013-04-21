@@ -19,9 +19,14 @@
 		DC3AE9791570D293008D2F79 /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = DC3AE9761570D293008D2F79 /* Constants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DC3AE97C1570D331008D2F79 /* HTTPCommsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = DC3AE97A1570D331008D2F79 /* HTTPCommsManager.h */; };
 		DC3AE97D1570D331008D2F79 /* HTTPCommsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3AE97B1570D331008D2F79 /* HTTPCommsManager.m */; };
-		DC3AE9A01570DD90008D2F79 /* BBVA.csv in Resources */ = {isa = PBXBuildFile; fileRef = DC3AE99D1570DD90008D2F79 /* BBVA.csv */; };
-		DC3AE9A11570DD90008D2F79 /* IBEX.csv in Resources */ = {isa = PBXBuildFile; fileRef = DC3AE99E1570DD90008D2F79 /* IBEX.csv */; };
-		DC3AE9A21570DD90008D2F79 /* Santander.csv in Resources */ = {isa = PBXBuildFile; fileRef = DC3AE99F1570DD90008D2F79 /* Santander.csv */; };
+		DCA20AE21723E93E0019E738 /* Predicate.h in Headers */ = {isa = PBXBuildFile; fileRef = DCA20AE01723E93E0019E738 /* Predicate.h */; };
+		DCA20AE31723E93E0019E738 /* Predicate.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA20AE11723E93E0019E738 /* Predicate.m */; };
+		DCA20AE71723F2A00019E738 /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = DCA20AE51723F29F0019E738 /* Constants.h */; };
+		DCD306BD1723602400CC9364 /* iris.csv in Resources */ = {isa = PBXBuildFile; fileRef = DCD306BC1723602400CC9364 /* iris.csv */; };
+		DCD306C01723715100CC9364 /* LocalPredictiveModel.h in Headers */ = {isa = PBXBuildFile; fileRef = DCD306BE1723715100CC9364 /* LocalPredictiveModel.h */; };
+		DCD306C11723715100CC9364 /* LocalPredictiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD306BF1723715100CC9364 /* LocalPredictiveModel.m */; };
+		DCD306C4172380A700CC9364 /* LocalPredictionTree.h in Headers */ = {isa = PBXBuildFile; fileRef = DCD306C2172380A700CC9364 /* LocalPredictionTree.h */; };
+		DCD306C5172380A700CC9364 /* LocalPredictionTree.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD306C3172380A700CC9364 /* LocalPredictionTree.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,9 +55,14 @@
 		DC3AE9761570D293008D2F79 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		DC3AE97A1570D331008D2F79 /* HTTPCommsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPCommsManager.h; sourceTree = "<group>"; };
 		DC3AE97B1570D331008D2F79 /* HTTPCommsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPCommsManager.m; sourceTree = "<group>"; };
-		DC3AE99D1570DD90008D2F79 /* BBVA.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BBVA.csv; sourceTree = "<group>"; };
-		DC3AE99E1570DD90008D2F79 /* IBEX.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = IBEX.csv; sourceTree = "<group>"; };
-		DC3AE99F1570DD90008D2F79 /* Santander.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Santander.csv; sourceTree = "<group>"; };
+		DCA20AE01723E93E0019E738 /* Predicate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Predicate.h; sourceTree = "<group>"; };
+		DCA20AE11723E93E0019E738 /* Predicate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Predicate.m; sourceTree = "<group>"; };
+		DCA20AE51723F29F0019E738 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		DCD306BC1723602400CC9364 /* iris.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iris.csv; sourceTree = "<group>"; };
+		DCD306BE1723715100CC9364 /* LocalPredictiveModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalPredictiveModel.h; sourceTree = "<group>"; };
+		DCD306BF1723715100CC9364 /* LocalPredictiveModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalPredictiveModel.m; sourceTree = "<group>"; };
+		DCD306C2172380A700CC9364 /* LocalPredictionTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalPredictionTree.h; sourceTree = "<group>"; };
+		DCD306C3172380A700CC9364 /* LocalPredictionTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalPredictionTree.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				DC3AE9731570D293008D2F79 /* include */,
+				DCA20AE41723E94B0019E738 /* localpredictions */,
 				DC3AE97A1570D331008D2F79 /* HTTPCommsManager.h */,
 				DC3AE97B1570D331008D2F79 /* HTTPCommsManager.m */,
 				DC3AE9511570D0B0008D2F79 /* ML4iOS.m */,
@@ -159,11 +170,23 @@
 		DC3AE99C1570DD90008D2F79 /* data */ = {
 			isa = PBXGroup;
 			children = (
-				DC3AE99D1570DD90008D2F79 /* BBVA.csv */,
-				DC3AE99E1570DD90008D2F79 /* IBEX.csv */,
-				DC3AE99F1570DD90008D2F79 /* Santander.csv */,
+				DCD306BC1723602400CC9364 /* iris.csv */,
 			);
 			path = data;
+			sourceTree = "<group>";
+		};
+		DCA20AE41723E94B0019E738 /* localpredictions */ = {
+			isa = PBXGroup;
+			children = (
+				DCA20AE51723F29F0019E738 /* Constants.h */,
+				DCD306BE1723715100CC9364 /* LocalPredictiveModel.h */,
+				DCD306BF1723715100CC9364 /* LocalPredictiveModel.m */,
+				DCD306C2172380A700CC9364 /* LocalPredictionTree.h */,
+				DCD306C3172380A700CC9364 /* LocalPredictionTree.m */,
+				DCA20AE01723E93E0019E738 /* Predicate.h */,
+				DCA20AE11723E93E0019E738 /* Predicate.m */,
+			);
+			name = localpredictions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,6 +200,10 @@
 				DC3AE9781570D293008D2F79 /* ML4iOSDelegate.h in Headers */,
 				DC3AE9791570D293008D2F79 /* Constants.h in Headers */,
 				DC3AE97C1570D331008D2F79 /* HTTPCommsManager.h in Headers */,
+				DCD306C01723715100CC9364 /* LocalPredictiveModel.h in Headers */,
+				DCD306C4172380A700CC9364 /* LocalPredictionTree.h in Headers */,
+				DCA20AE21723E93E0019E738 /* Predicate.h in Headers */,
+				DCA20AE71723F2A00019E738 /* Constants.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,7 +252,7 @@
 		DC3AE93F1570D0AF008D2F79 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "";
 			};
 			buildConfigurationList = DC3AE9421570D0AF008D2F79 /* Build configuration list for PBXProject "ML4iOS" */;
@@ -251,9 +278,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC3AE9A01570DD90008D2F79 /* BBVA.csv in Resources */,
-				DC3AE9A11570DD90008D2F79 /* IBEX.csv in Resources */,
-				DC3AE9A21570DD90008D2F79 /* Santander.csv in Resources */,
+				DCD306BD1723602400CC9364 /* iris.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +307,9 @@
 			files = (
 				DC3AE9521570D0B0008D2F79 /* ML4iOS.m in Sources */,
 				DC3AE97D1570D331008D2F79 /* HTTPCommsManager.m in Sources */,
+				DCD306C11723715100CC9364 /* LocalPredictiveModel.m in Sources */,
+				DCD306C5172380A700CC9364 /* LocalPredictionTree.m in Sources */,
+				DCA20AE31723E93E0019E738 /* Predicate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +337,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -332,6 +364,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;

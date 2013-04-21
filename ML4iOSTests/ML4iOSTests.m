@@ -30,7 +30,8 @@
     [super setUp];
     
     // Set-up code here.
-    apiLibrary = [[ML4iOS alloc]initWithUsername:@"YOUR_BIGML_USERNAME" key:@"YOUR_BIGML_API_KEY" developmentMode:NO];
+    //apiLibrary = [[ML4iOS alloc]initWithUsername:@"YOUR_BIGML_USERNAME" key:@"YOUR_BIGML_API_KEY" developmentMode:NO];
+    apiLibrary = [[ML4iOS alloc]initWithUsername:@"felixksp" key:@"9236b5c57063074edadc7baa25602a6360fc3872" developmentMode:NO];
     [apiLibrary setDelegate:self];
 }
 
@@ -47,11 +48,14 @@
 {
     NSInteger httpStatusCode = 0;
     
-    //CREATES A DATA SOURCE FROM A .CSV
-    NSString *path = [[NSBundle bundleForClass:[ML4iOSTests class]] pathForResource:@"IBEX" ofType:@"csv"];
-    NSDictionary* dataSource = [apiLibrary createDataSourceWithNameSync:@"IBEX_DataSource" filePath:path statusCode:&httpStatusCode];
+    NSString* modelId = @"";
+    NSString* inputDataForPrediction = @"{\"000000\": 3, \"000001\": 2, \"000002\": 1, \"000003\": 1}";
     
-    STAssertEquals(httpStatusCode, HTTP_CREATED, @"Error creating data source from IBEX.csv");
+    //CREATES A DATA SOURCE FROM A .CSV
+    NSString *path = [[NSBundle bundleForClass:[ML4iOSTests class]] pathForResource:@"iris" ofType:@"csv"];
+    NSDictionary* dataSource = [apiLibrary createDataSourceWithNameSync:@"iris_source" filePath:path statusCode:&httpStatusCode];
+    
+    STAssertEquals(httpStatusCode, HTTP_CREATED, @"Error creating data source from iris.csv");
     
     if(dataSource != nil && httpStatusCode == HTTP_CREATED)
     {
@@ -63,11 +67,11 @@
             sleep(1);
         }
         
-        NSLog(@"Data Source IBEX_DataSource Created and Ready");
+        NSLog(@"Data Source iris_source Created and Ready");
         
-        NSDictionary* dataSet = [apiLibrary createDataSetWithDataSourceIdSync:sourceId name:@"IBEX_DataSet" statusCode:&httpStatusCode];
+        NSDictionary* dataSet = [apiLibrary createDataSetWithDataSourceIdSync:sourceId name:@"iris_dataset" statusCode:&httpStatusCode];
         
-        STAssertEquals(httpStatusCode, HTTP_CREATED, @"Error creating dataset from IBEX_DataSource");
+        STAssertEquals(httpStatusCode, HTTP_CREATED, @"Error creating dataset from iris_source");
         
         if(dataSet != nil && httpStatusCode == HTTP_CREATED)
         {
@@ -76,33 +80,30 @@
             
             //WAIT UNTIL DATA SOURCE IS READY
             while (![apiLibrary checkDataSetIsReadyWithIdSync:dataSetId]) {
-                sleep(1);
+                sleep(3);
             }
             
-            NSLog(@"DataSet IBEX_DataSet Created and Ready");
+            NSLog(@"DataSet iris_dataset Created and Ready");
             
-            NSDictionary* model = [apiLibrary createModelWithDataSetIdSync:dataSetId name:@"IBEX_Model" statusCode:&httpStatusCode];
+            NSDictionary* model = [apiLibrary createModelWithDataSetIdSync:dataSetId name:@"iris_model" statusCode:&httpStatusCode];
             
-            STAssertEquals(httpStatusCode, HTTP_CREATED, @"Error creating model from IBEX_DataSet");
+            STAssertEquals(httpStatusCode, HTTP_CREATED, @"Error creating model from iris_dataset");
             
             if(model != nil && httpStatusCode == HTTP_CREATED)
             {
                 //EXTRACT MODEL ID AND CREATE PREDICTION FROM THAT MODEL
-                NSString* modelId = [ML4iOS getResourceIdentifierFromJSONObject:model];
+                modelId = [ML4iOS getResourceIdentifierFromJSONObject:model];
                 
                 //WAIT UNTIL MODEL IS READY
                 while (![apiLibrary checkModelIsReadyWithIdSync:modelId]) {
-                    sleep(1);
+                    sleep(3);
                 }
                 
-                NSLog(@"Model IBEX_Model Created and Ready");
+                NSLog(@"Model iris_model Created and Ready");
                 
-                //WE PASS Minimo=9000 and Maximo=10000
-                NSString* inputDataForPrediction = @"{\"000004\": 10000, \"000005\": 9000}";
+                NSDictionary* prediction = [apiLibrary createPredictionWithModelIdSync:modelId name:@"iris_prediction" inputData:inputDataForPrediction statusCode:&httpStatusCode];
                 
-                NSDictionary* prediction = [apiLibrary createPredictionWithModelIdSync:modelId name:@"IBEX_Prediction" inputData:inputDataForPrediction statusCode:&httpStatusCode];
-                
-                STAssertEquals(httpStatusCode, HTTP_CREATED, @"Error creating prediction from IBEX_Model");
+                STAssertEquals(httpStatusCode, HTTP_CREATED, @"Error creating prediction from iris_model");
                 
                 if(prediction != nil)
                 {
@@ -114,10 +115,27 @@
                         sleep(1);
                     }
                     
-                    NSLog(@"Prediction IBEX_Prediction Created and Ready");
+                    NSLog(@"Prediction iris_prediction Created and Ready");
                 }
             }
         }
+    }
+    
+    
+    if([modelId length] > 0)
+    {
+        //GET IRIS MODEL AND CREATE LOCAL PREDICTIONS
+        NSDictionary* irisModel = [apiLibrary getModelWithIdSync:modelId statusCode:&httpStatusCode];
+    
+        NSLog(@"Iris Model for Local Prediction Retrieved with id = %@", [ML4iOS getResourceIdentifierFromJSONObject:irisModel]);
+        
+        NSDictionary* prediction = [apiLibrary createLocalPredictionWithJSONModelSync:irisModel arguments:inputDataForPrediction argsByName:NO];
+        
+        STAssertNotNil([prediction objectForKey:@"value"], @"Local Prediction value can't be nil");
+        STAssertNotNil([prediction objectForKey:@"confidence"], @"Local Prediction confidence can't be nil");
+        
+        NSLog(@"Local Prediction Value = %@", [prediction objectForKey:@"value"]);
+        NSLog(@"Local Prediction Confidence = %@", [prediction objectForKey:@"confidence"]);
     }
 }
 
