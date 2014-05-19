@@ -133,7 +133,7 @@
 {
     NSString* identifier = nil;
     
-    NSString* fullSourceIdentifier = [resouce objectForKey:@"resource"];
+    NSString* fullSourceIdentifier = resouce[@"resource"];
     NSRange range = [fullSourceIdentifier rangeOfString:@"/"];
     
     if(range.location != NSNotFound)
@@ -158,8 +158,8 @@
 -(NSOperation*)createDataSourceWithName:(NSString*)name filePath:(NSString*)filePath
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:2];
-    [params setObject:name forKey:@"name"];
-    [params setObject:filePath forKey:@"filePath"];
+    params[@"name"] = name;
+    params[@"filePath"] = filePath;
     
     return [self launchOperationWithSelector:@selector(createDataSourceAction:) params:params];
 }
@@ -167,8 +167,8 @@
 -(void)createDataSourceAction:(NSDictionary*)params
 {
     NSInteger statusCode = 0;
-    NSString* name = [params objectForKey:@"name"];
-    NSString* filePath = [params objectForKey:@"filePath"];
+    NSString* name = params[@"name"];
+    NSString* filePath = params[@"filePath"];
     
     NSDictionary* dataSource = [commsManager createDataSourceWithName:name filePath:filePath statusCode:&statusCode];
     
@@ -183,8 +183,8 @@
 -(NSOperation*)updateDataSourceNameWithId:(NSString*)identifier name:(NSString*)name
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:2];
-    [params setObject:identifier forKey:@"identifier"];
-    [params setObject:name forKey:@"name"];
+    params[@"identifier"] = identifier;
+    params[@"name"] = name;
     
     return [self launchOperationWithSelector:@selector(updateDataSourceAction:) params:params];
 }
@@ -192,8 +192,8 @@
 -(void)updateDataSourceAction:(NSDictionary*)params
 {
     NSInteger statusCode = 0;
-    NSString* identifier = [params objectForKey:@"identifier"];
-    NSString* name = [params objectForKey:@"name"];
+    NSString* identifier = params[@"identifier"];
+    NSString* name = params[@"name"];
     
     NSDictionary* dataSource = [commsManager updateDataSourceNameWithId:identifier name:name statusCode:&statusCode];
     
@@ -208,14 +208,14 @@
 -(NSOperation*)deleteDataSourceWithId:(NSString*)identifier
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:1];
-    [params setObject:identifier forKey:@"identifier"];
+    params[@"identifier"] = identifier;
     
     return [self launchOperationWithSelector:@selector(deleteDataSourceAction:) params:params];
 }
 
 -(void)deleteDataSourceAction:(NSDictionary*)params
 {
-    NSInteger statusCode = [commsManager deleteDataSourceWithId:[params objectForKey:@"identifier"]];
+    NSInteger statusCode = [commsManager deleteDataSourceWithId:params[@"identifier"]];
     
     [delegate dataSourceDeletedWithStatusCode:statusCode];
 }
@@ -228,9 +228,9 @@
 -(NSOperation*)getAllDataSourcesWithName:(NSString*)name offset:(NSInteger)offset limit:(NSInteger)limit
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:3];
-    [params setObject:name forKey:@"name"];
-    [params setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
-    [params setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
+    params[@"name"] = name;
+    params[@"offset"] = @(offset);
+    params[@"limit"] = @(limit);
     
     return [self launchOperationWithSelector:@selector(getAllDataSourcesAction:) params:params];
 }
@@ -238,9 +238,9 @@
 -(void)getAllDataSourcesAction:(NSDictionary*)params
 {
     NSInteger statusCode = 0;
-    NSString* name = [params objectForKey:@"name"];
-    NSInteger offset = [[params objectForKey:@"offset"]integerValue];
-    NSInteger limit = [[params objectForKey:@"limit"]integerValue];
+    NSString* name = params[@"name"];
+    NSInteger offset = [params[@"offset"]integerValue];
+    NSInteger limit = [params[@"limit"]integerValue];
     
     NSDictionary* dataSources = [commsManager getAllDataSourcesWithName:name offset:offset limit:limit statusCode:&statusCode];
     
@@ -255,7 +255,7 @@
 -(NSOperation*)getDataSourceWithId:(NSString*)identifier
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:1];
-    [params setObject:identifier forKey:@"identifier"];
+    params[@"identifier"] = identifier;
     
     return [self launchOperationWithSelector:@selector(getDataSourceAction:) params:params];
 }
@@ -263,7 +263,7 @@
 -(void)getDataSourceAction:(NSDictionary*)params
 {
     NSInteger statusCode = 0;
-    NSDictionary* dataSource = [commsManager getDataSourceWithId:[params objectForKey:@"identifier"] statusCode:&statusCode];
+    NSDictionary* dataSource = [commsManager getDataSourceWithId:params[@"identifier"] statusCode:&statusCode];
     
     [delegate dataSourceRetrieved:dataSource statusCode:statusCode];
 }
@@ -276,7 +276,7 @@
     NSDictionary* dataSource = [commsManager getDataSourceWithId:identifier statusCode:&statusCode];
     
     if(dataSource != nil && statusCode == HTTP_OK)
-        ready = [[[dataSource objectForKey:@"status"]objectForKey:@"code"]intValue] == FINISHED;
+        ready = [dataSource[@"status"][@"code"]intValue] == FINISHED;
     
     return ready;
 }
@@ -284,7 +284,7 @@
 -(NSOperation*)checkDataSourceIsReadyWithId:(NSString*)identifier
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:1];
-    [params setObject:identifier forKey:@"identifier"];
+    params[@"identifier"] = identifier;
     
     return [self launchOperationWithSelector:@selector(checkDataSourceIsReadyAction:) params:params];
 }
@@ -294,10 +294,10 @@
     BOOL ready = NO;
     
     NSInteger statusCode = 0;
-    NSDictionary* dataSource = [commsManager getDataSourceWithId:[params objectForKey:@"identifier"] statusCode:&statusCode];
+    NSDictionary* dataSource = [commsManager getDataSourceWithId:params[@"identifier"] statusCode:&statusCode];
     
     if(dataSource != nil && statusCode == HTTP_OK)
-        ready = [[[dataSource objectForKey:@"status"]objectForKey:@"code"]intValue] == FINISHED;
+        ready = [dataSource[@"status"][@"code"]intValue] == FINISHED;
     
     [delegate dataSourceIsReady:ready];
 }
@@ -318,8 +318,8 @@
 -(NSOperation*)createDataSetWithDataSourceId:(NSString*)sourceId name:(NSString*)name
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:2];
-    [params setObject:sourceId forKey:@"sourceId"];
-    [params setObject:name forKey:@"name"];
+    params[@"sourceId"] = sourceId;
+    params[@"name"] = name;
     
     return [self launchOperationWithSelector:@selector(createDataSetAction:) params:params];
 }
@@ -327,8 +327,8 @@
 -(void)createDataSetAction:(NSDictionary*)params
 {
     NSInteger statusCode = 0;
-    NSString* sourceId = [params objectForKey:@"sourceId"];
-    NSString* name = [params objectForKey:@"name"];
+    NSString* sourceId = params[@"sourceId"];
+    NSString* name = params[@"name"];
     
     NSDictionary* dataSet = [commsManager createDataSetWithDataSourceId:sourceId name:name statusCode:&statusCode];
     
@@ -343,8 +343,8 @@
 -(NSOperation*)updateDataSetNameWithId:(NSString*)identifier name:(NSString*)name
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:2];
-    [params setObject:identifier forKey:@"identifier"];
-    [params setObject:name forKey:@"name"];
+    params[@"identifier"] = identifier;
+    params[@"name"] = name;
     
     return [self launchOperationWithSelector:@selector(updateDataSetAction:) params:params];
 }
@@ -352,8 +352,8 @@
 -(void)updateDataSetAction:(NSDictionary*)params
 {
     NSInteger statusCode = 0;
-    NSString* identifier = [params objectForKey:@"identifier"];
-    NSString* name = [params objectForKey:@"name"];
+    NSString* identifier = params[@"identifier"];
+    NSString* name = params[@"name"];
     
     NSDictionary* dataSet = [commsManager updateDataSetNameWithId:identifier name:name statusCode:&statusCode];
     
@@ -368,14 +368,14 @@
 -(NSOperation*)deleteDataSetWithId:(NSString*)identifier
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:1];
-    [params setObject:identifier forKey:@"identifier"];
+    params[@"identifier"] = identifier;
     
     return [self launchOperationWithSelector:@selector(deleteDataSetAction:) params:params];
 }
 
 -(void)deleteDataSetAction:(NSDictionary*)params
 {
-    NSInteger statusCode = [commsManager deleteDataSetWithId:[params objectForKey:@"identifier"]];
+    NSInteger statusCode = [commsManager deleteDataSetWithId:params[@"identifier"]];
     
     [delegate dataSetDeletedWithStatusCode:statusCode];
 }
@@ -388,9 +388,9 @@
 -(NSOperation*)getAllDataSetsWithName:(NSString*)name offset:(NSInteger)offset limit:(NSInteger)limit
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:3];
-    [params setObject:name forKey:@"name"];
-    [params setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
-    [params setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
+    params[@"name"] = name;
+    params[@"offset"] = @(offset);
+    params[@"limit"] = @(limit);
     
     return [self launchOperationWithSelector:@selector(getAllDataSetsAction:) params:params];
 }
@@ -398,9 +398,9 @@
 -(void)getAllDataSetsAction:(NSDictionary*)params
 {
     NSInteger statusCode = 0;
-    NSString* name = [params objectForKey:@"name"];
-    NSInteger offset = [[params objectForKey:@"offset"]integerValue];
-    NSInteger limit = [[params objectForKey:@"limit"]integerValue];
+    NSString* name = params[@"name"];
+    NSInteger offset = [params[@"offset"]integerValue];
+    NSInteger limit = [params[@"limit"]integerValue];
     
     NSDictionary* dataSources = [commsManager getAllDataSetsWithName:name offset:offset limit:limit statusCode:&statusCode];
     
@@ -415,7 +415,7 @@
 -(NSOperation*)getDataSetWithId:(NSString*)identifier
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:1];
-    [params setObject:identifier forKey:@"identifier"];
+    params[@"identifier"] = identifier;
     
     return [self launchOperationWithSelector:@selector(getDataSetAction:) params:params];
 }
@@ -423,7 +423,7 @@
 -(void)getDataSetAction:(NSDictionary*)params
 {
     NSInteger statusCode = 0;
-    NSDictionary* dataSet = [commsManager getDataSetWithId:[params objectForKey:@"identifier"] statusCode:&statusCode];
+    NSDictionary* dataSet = [commsManager getDataSetWithId:params[@"identifier"] statusCode:&statusCode];
     
     [delegate dataSetRetrieved:dataSet statusCode:statusCode];
 }
@@ -436,7 +436,7 @@
     NSDictionary* dataSet = [commsManager getDataSetWithId:identifier statusCode:&statusCode];
     
     if(dataSet != nil && statusCode == HTTP_OK)
-        ready = [[[dataSet objectForKey:@"status"]objectForKey:@"code"]intValue] == FINISHED;
+        ready = [dataSet[@"status"][@"code"]intValue] == FINISHED;
     
     return ready;
 }
@@ -444,7 +444,7 @@
 -(NSOperation*)checkDataSetIsReadyWithId:(NSString*)identifier
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:1];
-    [params setObject:identifier forKey:@"identifier"];
+    params[@"identifier"] = identifier;
     
     return [self launchOperationWithSelector:@selector(checkDataSetIsReadyAction:) params:params];
 }
@@ -454,10 +454,10 @@
     BOOL ready = NO;
     
     NSInteger statusCode = 0;
-    NSDictionary* dataSet = [commsManager getDataSetWithId:[params objectForKey:@"identifier"] statusCode:&statusCode];
+    NSDictionary* dataSet = [commsManager getDataSetWithId:params[@"identifier"] statusCode:&statusCode];
     
     if(dataSet != nil && statusCode == HTTP_OK)
-        ready = [[[dataSet objectForKey:@"status"]objectForKey:@"code"]intValue] == FINISHED;
+        ready = [dataSet[@"status"][@"code"]intValue] == FINISHED;
     
     [delegate dataSetIsReady:ready];
 }
@@ -478,8 +478,8 @@
 -(NSOperation*)createModelWithDataSetId:(NSString*)dataSetId name:(NSString*)name
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:2];
-    [params setObject:dataSetId forKey:@"dataSetId"];
-    [params setObject:name forKey:@"name"];
+    params[@"dataSetId"] = dataSetId;
+    params[@"name"] = name;
     
     return [self launchOperationWithSelector:@selector(createModelAction:) params:params];
 }
@@ -487,8 +487,8 @@
 -(void)createModelAction:(NSDictionary*)params
 {
     NSInteger statusCode = 0;
-    NSString* dataSetId = [params objectForKey:@"dataSetId"];
-    NSString* name = [params objectForKey:@"name"];
+    NSString* dataSetId = params[@"dataSetId"];
+    NSString* name = params[@"name"];
     
     NSDictionary* model = [commsManager createModelWithDataSetId:dataSetId name:name statusCode:&statusCode];
     
@@ -503,8 +503,8 @@
 -(NSOperation*)updateModelNameWithId:(NSString*)identifier name:(NSString*)name
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:2];
-    [params setObject:identifier forKey:@"identifier"];
-    [params setObject:name forKey:@"name"];
+    params[@"identifier"] = identifier;
+    params[@"name"] = name;
     
     return [self launchOperationWithSelector:@selector(updateModelAction:) params:params];
 }
@@ -512,8 +512,8 @@
 -(void)updateModelAction:(NSDictionary*)params
 {
     NSInteger statusCode = 0;
-    NSString* identifier = [params objectForKey:@"identifier"];
-    NSString* name = [params objectForKey:@"name"];
+    NSString* identifier = params[@"identifier"];
+    NSString* name = params[@"name"];
     
     NSDictionary* model = [commsManager updateModelNameWithId:identifier name:name statusCode:&statusCode];
     
@@ -528,14 +528,14 @@
 -(NSOperation*)deleteModelWithId:(NSString*)identifier
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:1];
-    [params setObject:identifier forKey:@"identifier"];
+    params[@"identifier"] = identifier;
     
     return [self launchOperationWithSelector:@selector(deleteModelAction:) params:params];
 }
 
 -(void)deleteModelAction:(NSDictionary*)params
 {
-    NSInteger statusCode = [commsManager deleteModelWithId:[params objectForKey:@"identifier"]];
+    NSInteger statusCode = [commsManager deleteModelWithId:params[@"identifier"]];
     
     [delegate modelDeletedWithStatusCode:statusCode];
 }
@@ -548,9 +548,9 @@
 -(NSOperation*)getAllModelsWithName:(NSString*)name offset:(NSInteger)offset limit:(NSInteger)limit
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:3];
-    [params setObject:name forKey:@"name"];
-    [params setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
-    [params setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
+    params[@"name"] = name;
+    params[@"offset"] = @(offset);
+    params[@"limit"] = @(limit);
     
     return [self launchOperationWithSelector:@selector(getAllModelsAction:) params:params];
 }
@@ -558,9 +558,9 @@
 -(void)getAllModelsAction:(NSDictionary*)params
 {
     NSInteger statusCode = 0;
-    NSString* name = [params objectForKey:@"name"];
-    NSInteger offset = [[params objectForKey:@"offset"]integerValue];
-    NSInteger limit = [[params objectForKey:@"limit"]integerValue];
+    NSString* name = params[@"name"];
+    NSInteger offset = [params[@"offset"]integerValue];
+    NSInteger limit = [params[@"limit"]integerValue];
     
     NSDictionary* models = [commsManager getAllModelsWithName:name offset:offset limit:limit statusCode:&statusCode];
     
@@ -575,7 +575,7 @@
 -(NSOperation*)getModelWithId:(NSString*)identifier
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:1];
-    [params setObject:identifier forKey:@"identifier"];
+    params[@"identifier"] = identifier;
     
     return [self launchOperationWithSelector:@selector(getModelAction:) params:params];
 }
@@ -583,7 +583,7 @@
 -(void)getModelAction:(NSDictionary*)params
 {
     NSInteger statusCode = 0;
-    NSDictionary* model = [commsManager getModelWithId:[params objectForKey:@"identifier"] statusCode:&statusCode];
+    NSDictionary* model = [commsManager getModelWithId:params[@"identifier"] statusCode:&statusCode];
     
     [delegate modelRetrieved:model statusCode:statusCode];
 }
@@ -596,7 +596,7 @@
     NSDictionary* model = [commsManager getModelWithId:identifier statusCode:&statusCode];
     
     if(model != nil && statusCode == HTTP_OK)
-        ready = [[[model objectForKey:@"status"]objectForKey:@"code"]intValue] == FINISHED;
+        ready = [model[@"status"][@"code"]intValue] == FINISHED;
     
     return ready;
 }
@@ -604,7 +604,7 @@
 -(NSOperation*)checkModelIsReadyWithId:(NSString*)identifier
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:3];
-    [params setObject:identifier forKey:@"identifier"];
+    params[@"identifier"] = identifier;
     
     return [self launchOperationWithSelector:@selector(checkModelIsReadyAction:) params:params];
 }
@@ -614,10 +614,10 @@
     BOOL ready = NO;
     
     NSInteger statusCode = 0;
-    NSDictionary* model = [commsManager getModelWithId:[params objectForKey:@"identifier"] statusCode:&statusCode];
+    NSDictionary* model = [commsManager getModelWithId:params[@"identifier"] statusCode:&statusCode];
     
     if(model != nil && statusCode == HTTP_OK)
-        ready = [[[model objectForKey:@"status"]objectForKey:@"code"]intValue] == FINISHED;
+        ready = [model[@"status"][@"code"]intValue] == FINISHED;
     
     [delegate modelIsReady:ready];
 }
@@ -638,9 +638,9 @@
 -(NSOperation*)createPredictionWithModelId:(NSString*)modelId name:(NSString*)name inputData:(NSString*)inputData
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:3];
-    [params setObject:modelId forKey:@"identifier"];
-    [params setObject:name forKey:@"name"];
-    [params setObject:inputData forKey:@"inputData"];
+    params[@"identifier"] = modelId;
+    params[@"name"] = name;
+    params[@"inputData"] = inputData;
     
     return [self launchOperationWithSelector:@selector(createPredictionAction:) params:params];
 }
@@ -648,9 +648,9 @@
 -(void)createPredictionAction:(NSDictionary*)params
 {
     NSInteger statusCode = 0;
-    NSString* identifier = [params objectForKey:@"identifier"];
-    NSString* name = [params objectForKey:@"name"];
-    NSString* inputData = [params objectForKey:@"inputData"];
+    NSString* identifier = params[@"identifier"];
+    NSString* name = params[@"name"];
+    NSString* inputData = params[@"inputData"];
     
     NSDictionary* prediction = [commsManager createPredictionWithModelId:identifier name:name inputData:inputData statusCode:&statusCode];
     
@@ -665,8 +665,8 @@
 -(NSOperation*)updatePredictionWithId:(NSString*)identifier name:(NSString*)name
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:3];
-    [params setObject:identifier forKey:@"identifier"];
-    [params setObject:name forKey:@"name"];
+    params[@"identifier"] = identifier;
+    params[@"name"] = name;
     
     return [self launchOperationWithSelector:@selector(updatePredictionAction:) params:params];
 }
@@ -674,8 +674,8 @@
 -(void)updatePredictionAction:(NSDictionary*)params
 {
     NSInteger statusCode = 0;
-    NSString* identifier = [params objectForKey:@"identifier"];
-    NSString* name = [params objectForKey:@"name"];
+    NSString* identifier = params[@"identifier"];
+    NSString* name = params[@"name"];
     
     NSDictionary* prediction = [commsManager updatePredictionWithId:identifier name:name statusCode:&statusCode];
     
@@ -690,14 +690,14 @@
 -(NSOperation*)deletePredictionWithId:(NSString*)identifier
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:1];
-    [params setObject:identifier forKey:@"identifier"];
+    params[@"identifier"] = identifier;
     
     return [self launchOperationWithSelector:@selector(deletePredictionAction:) params:params];
 }
 
 -(void)deletePredictionAction:(NSDictionary*)params
 {
-    NSInteger statusCode = [commsManager deletePredictionWithId:[params objectForKey:@"identifier"]];
+    NSInteger statusCode = [commsManager deletePredictionWithId:params[@"identifier"]];
     
     [delegate predictionDeletedWithStatusCode:statusCode];
 }
@@ -710,9 +710,9 @@
 -(NSOperation*)getAllPredictionsWithName:(NSString*)name offset:(NSInteger)offset limit:(NSInteger)limit
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:3];
-    [params setObject:name forKey:@"name"];
-    [params setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
-    [params setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
+    params[@"name"] = name;
+    params[@"offset"] = @(offset);
+    params[@"limit"] = @(limit);
     
     return [self launchOperationWithSelector:@selector(getAllPredictionsAction:) params:params];
 }
@@ -720,9 +720,9 @@
 -(void)getAllPredictionsAction:(NSDictionary*)params
 {
     NSInteger statusCode = 0;
-    NSString* name = [params objectForKey:@"name"];
-    NSInteger offset = [[params objectForKey:@"offset"]integerValue];
-    NSInteger limit = [[params objectForKey:@"limit"]integerValue];
+    NSString* name = params[@"name"];
+    NSInteger offset = [params[@"offset"]integerValue];
+    NSInteger limit = [params[@"limit"]integerValue];
     
     NSDictionary* predictions = [commsManager getAllPredictionsWithName:name offset:offset limit:limit statusCode:&statusCode];
     
@@ -737,7 +737,7 @@
 -(NSOperation*)getPredictionWithId:(NSString*)identifier
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:1];
-    [params setObject:identifier forKey:@"identifier"];
+    params[@"identifier"] = identifier;
     
     return [self launchOperationWithSelector:@selector(getPredictionAction:) params:params];
 }
@@ -745,7 +745,7 @@
 -(void)getPredictionAction:(NSDictionary*)params
 {
     NSInteger statusCode = 0;
-    NSDictionary* prediction = [commsManager getPredictionWithId:[params objectForKey:@"identifier"] statusCode:&statusCode];
+    NSDictionary* prediction = [commsManager getPredictionWithId:params[@"identifier"] statusCode:&statusCode];
     
     [delegate predictionRetrieved:prediction statusCode:statusCode];
 }
@@ -758,7 +758,7 @@
     NSDictionary* prediction = [commsManager getPredictionWithId:identifier statusCode:&statusCode];
     
     if(prediction != nil && statusCode == HTTP_OK)
-        ready = [[[prediction objectForKey:@"status"]objectForKey:@"code"]intValue] == FINISHED;
+        ready = [prediction[@"status"][@"code"]intValue] == FINISHED;
     
     return ready;
 }
@@ -766,7 +766,7 @@
 -(NSOperation*)checkPredictionIsReadyWithId:(NSString*)identifier
 {
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:3];
-    [params setObject:identifier forKey:@"identifier"];
+    params[@"identifier"] = identifier;
     
     return [self launchOperationWithSelector:@selector(checkPredictionIsReadyAction:) params:params];
 }
@@ -776,10 +776,10 @@
     BOOL ready = NO;
     
     NSInteger statusCode = 0;
-    NSDictionary* prediction = [commsManager getPredictionWithId:[params objectForKey:@"identifier"] statusCode:&statusCode];
+    NSDictionary* prediction = [commsManager getPredictionWithId:params[@"identifier"] statusCode:&statusCode];
     
     if(prediction != nil && statusCode == HTTP_OK)
-        ready = [[[prediction objectForKey:@"status"]objectForKey:@"code"]intValue] == FINISHED;
+        ready = [prediction[@"status"][@"code"]intValue] == FINISHED;
     
     [delegate predictionIsReady:ready];
 }

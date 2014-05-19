@@ -36,10 +36,10 @@
         fields = aFields;
         objectiveField = aObjectiveField;
         
-        output = [root objectForKey:@"output"];
-        confidence = [root objectForKey:@"confidence"];
+        output = root[@"output"];
+        confidence = root[@"confidence"];
         
-        NSObject* predicateObj = [root objectForKey:@"predicate"];
+        NSObject* predicateObj = root[@"predicate"];
         
         //Generate predicate
         if([predicateObj respondsToSelector:@selector(boolValue)] && [(NSNumber*)predicateObj boolValue] == YES)
@@ -47,24 +47,24 @@
         else
         {
             NSDictionary* predicateDict = (NSDictionary*)predicateObj;
-            NSString* field = [predicateDict objectForKey:@"field"];
+            NSString* field = predicateDict[@"field"];
             
             self.predicate = [[Predicate alloc]init];
-            [self.predicate setOpType:[[fields objectForKey:field]objectForKey:@"optype"]];
-            [self.predicate setPredicateOperator:[predicateDict objectForKey:@"operator"]];
+            [self.predicate setOpType:fields[field][@"optype"]];
+            [self.predicate setPredicateOperator:predicateDict[@"operator"]];
             [self.predicate setField:field];
-            [self.predicate setValue:[predicateDict objectForKey:@"value"]];
+            [self.predicate setValue:predicateDict[@"value"]];
         }
         
         //Generate children array
         children = [[NSMutableArray alloc]init];
-        NSArray* childrenObj = [root objectForKey:@"children"];
+        NSArray* childrenObj = root[@"children"];
         
         if(childrenObj != nil)
         {
             for(NSInteger i = 0; i < [childrenObj count]; i++)
             {
-                NSDictionary* child = [childrenObj objectAtIndex:i];
+                NSDictionary* child = childrenObj[i];
                 
                 LocalPredictionTree* childTree = [[LocalPredictionTree alloc]initWithRoot:child fields:fields objectiveField:objectiveField];
                 [children addObject:childTree];
@@ -82,10 +82,10 @@
     {
         for(NSInteger i = 0; i < [children count]; i++)
         {
-            LocalPredictionTree* child = [children objectAtIndex:i];
+            LocalPredictionTree* child = children[i];
             
             NSString* field = child.predicate.field;
-            NSString* inputValue = [inputData objectForKey:[[fields objectForKey:field]objectForKey:@"name"]];
+            NSString* inputValue = inputData[fields[field][@"name"]];
             
             if(inputValue == nil)
                 continue;

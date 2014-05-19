@@ -29,10 +29,10 @@
     
     if(jsonModel != nil && args != nil)
     {
-        NSString* objectiveField = [jsonModel objectForKey:@"objective_field"];
+        NSString* objectiveField = jsonModel[@"objective_field"];
     
-        NSDictionary* fields = [[jsonModel objectForKey:@"model"]objectForKey:@"fields"];
-        NSDictionary* root = [[jsonModel objectForKey:@"model"]objectForKey:@"root"];
+        NSDictionary* fields = jsonModel[@"model"][@"fields"];
+        NSDictionary* root = jsonModel[@"model"][@"root"];
     
         NSError *error = nil;
         NSDictionary* inputData = [NSJSONSerialization JSONObjectWithData:[args dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -54,8 +54,8 @@
     
     for(NSString* key in [inputDataByFieldId keyEnumerator])
     {
-        NSDictionary* fieldName = [[fields objectForKey:key]objectForKey:@"name"];
-        [inputDataByName setObject:[inputDataByFieldId objectForKey:key] forKey:fieldName];
+        NSDictionary* fieldName = fields[key][@"name"];
+        inputDataByName[fieldName] = inputDataByFieldId[key];
     }
     
     return inputDataByName;
