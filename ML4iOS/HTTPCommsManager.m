@@ -210,9 +210,9 @@
             developmentMode = devMode;
             
             if(developmentMode)
-                apiBaseURL = [[NSString alloc] initWithString:@"https://bigml.io/dev/andromeda"];
+                apiBaseURL = @"https://bigml.io/dev/andromeda";
             else
-                apiBaseURL = [[NSString alloc] initWithString:@"https://bigml.io/andromeda"];
+                apiBaseURL = @"https://bigml.io/andromeda";
                 
             authToken = [[NSString alloc]initWithFormat:@"?username=%@;api_key=%@;", apiUsername, apiKey];
         }
