@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49559423192A6693006F4D9E /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 49559422192A6693006F4D9E /* Constants.h */; };
 		DC3AE94C1570D0AF008D2F79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3AE94B1570D0AF008D2F79 /* Foundation.framework */; };
 		DC3AE9521570D0B0008D2F79 /* ML4iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3AE9511570D0B0008D2F79 /* ML4iOS.m */; };
 		DC3AE95A1570D0B0008D2F79 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3AE9591570D0B0008D2F79 /* SenTestingKit.framework */; };
@@ -16,7 +17,6 @@
 		DC3AE9691570D0B0008D2F79 /* ML4iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3AE9681570D0B0008D2F79 /* ML4iOSTests.m */; };
 		DC3AE9771570D293008D2F79 /* ML4iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = DC3AE9741570D293008D2F79 /* ML4iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DC3AE9781570D293008D2F79 /* ML4iOSDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = DC3AE9751570D293008D2F79 /* ML4iOSDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DC3AE9791570D293008D2F79 /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = DC3AE9761570D293008D2F79 /* Constants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DC3AE97C1570D331008D2F79 /* HTTPCommsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = DC3AE97A1570D331008D2F79 /* HTTPCommsManager.h */; };
 		DC3AE97D1570D331008D2F79 /* HTTPCommsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3AE97B1570D331008D2F79 /* HTTPCommsManager.m */; };
 		DCA20AE21723E93E0019E738 /* Predicate.h in Headers */ = {isa = PBXBuildFile; fileRef = DCA20AE01723E93E0019E738 /* Predicate.h */; };
@@ -40,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		49559422192A6693006F4D9E /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		DC3AE9481570D0AF008D2F79 /* libML4iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libML4iOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC3AE94B1570D0AF008D2F79 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DC3AE94F1570D0B0008D2F79 /* ML4iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ML4iOS-Prefix.pch"; sourceTree = "<group>"; };
@@ -52,7 +53,6 @@
 		DC3AE9681570D0B0008D2F79 /* ML4iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ML4iOSTests.m; sourceTree = "<group>"; };
 		DC3AE9741570D293008D2F79 /* ML4iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ML4iOS.h; sourceTree = "<group>"; };
 		DC3AE9751570D293008D2F79 /* ML4iOSDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ML4iOSDelegate.h; sourceTree = "<group>"; };
-		DC3AE9761570D293008D2F79 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		DC3AE97A1570D331008D2F79 /* HTTPCommsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPCommsManager.h; sourceTree = "<group>"; };
 		DC3AE97B1570D331008D2F79 /* HTTPCommsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPCommsManager.m; sourceTree = "<group>"; };
 		DCA20AE01723E93E0019E738 /* Predicate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Predicate.h; sourceTree = "<group>"; };
@@ -162,7 +162,7 @@
 			children = (
 				DC3AE9741570D293008D2F79 /* ML4iOS.h */,
 				DC3AE9751570D293008D2F79 /* ML4iOSDelegate.h */,
-				DC3AE9761570D293008D2F79 /* Constants.h */,
+				49559422192A6693006F4D9E /* Constants.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -198,11 +198,11 @@
 			files = (
 				DC3AE9771570D293008D2F79 /* ML4iOS.h in Headers */,
 				DC3AE9781570D293008D2F79 /* ML4iOSDelegate.h in Headers */,
-				DC3AE9791570D293008D2F79 /* Constants.h in Headers */,
 				DC3AE97C1570D331008D2F79 /* HTTPCommsManager.h in Headers */,
 				DCD306C01723715100CC9364 /* LocalPredictiveModel.h in Headers */,
 				DCD306C4172380A700CC9364 /* LocalPredictionTree.h in Headers */,
 				DCA20AE21723E93E0019E738 /* Predicate.h in Headers */,
+				49559423192A6693006F4D9E /* Constants.h in Headers */,
 				DCA20AE71723F2A00019E738 /* Constants.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
