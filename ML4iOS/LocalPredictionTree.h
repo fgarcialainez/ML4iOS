@@ -38,7 +38,7 @@
     NSMutableArray* children; //LocalPredictionTree Array
 }
 
-@property (nonatomic, retain) Predicate* predicate;
+@property (nonatomic, strong) Predicate* predicate;
 
 /**
  * Initializes a LocalPredictionTree object

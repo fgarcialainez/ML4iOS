@@ -39,7 +39,6 @@
 {
     // Tear-down code here.
     [apiLibrary cancelAllAsynchronousOperations];
-    [apiLibrary release];
     
     [super tearDown];
 }

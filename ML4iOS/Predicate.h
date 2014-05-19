@@ -31,9 +31,9 @@
     NSString* value;
 }
 
-@property (nonatomic, retain) NSString* opType;
-@property (nonatomic, retain) NSString* predicateOperator;
-@property (nonatomic, retain) NSString* field;
-@property (nonatomic, retain) NSString* value;
+@property (nonatomic, strong) NSString* opType;
+@property (nonatomic, strong) NSString* predicateOperator;
+@property (nonatomic, strong) NSString* field;
+@property (nonatomic, strong) NSString* value;
 
 @end

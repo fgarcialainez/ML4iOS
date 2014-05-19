@@ -41,7 +41,7 @@
             inputData = [LocalPredictiveModel createInputDataByNameFromInputDataByFieldId:inputData fields:fields];
         
         //Explore the predictive model tree recursively
-        LocalPredictionTree* tree = [[[LocalPredictionTree alloc]initWithRoot:root fields:fields objectiveField:objectiveField]autorelease];
+        LocalPredictionTree* tree = [[LocalPredictionTree alloc]initWithRoot:root fields:fields objectiveField:objectiveField];
         prediction = [tree predict:inputData];
     }
     

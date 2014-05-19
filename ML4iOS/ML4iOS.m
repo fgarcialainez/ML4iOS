@@ -119,7 +119,7 @@
 
 -(NSOperation*)launchOperationWithSelector:(SEL)selector params:(NSObject*)params
 {
-    NSInvocationOperation *operation = [[[NSInvocationOperation alloc] initWithTarget:self selector:selector object:params]autorelease];
+    NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:selector object:params];
     [operationQueue addOperation:operation];
     return operation;
 }
@@ -127,9 +127,6 @@
 -(void)dealloc
 {
     [operationQueue cancelAllOperations];
-    [operationQueue release];
-    [commsManager release];
-    [super dealloc];
 }
 
 +(NSString*) getResourceIdentifierFromJSONObject:(NSDictionary*)resouce

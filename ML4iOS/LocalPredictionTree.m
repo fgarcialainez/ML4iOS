@@ -32,12 +32,12 @@
     
     if(self)
     {
-        root = [aRoot retain];
-        fields = [aFields retain];
-        objectiveField = [aObjectiveField retain];
+        root = aRoot;
+        fields = aFields;
+        objectiveField = aObjectiveField;
         
-        output = [[root objectForKey:@"output"]retain];
-        confidence = [[root objectForKey:@"confidence"]retain];
+        output = [root objectForKey:@"output"];
+        confidence = [root objectForKey:@"confidence"];
         
         NSObject* predicateObj = [root objectForKey:@"predicate"];
         
@@ -66,7 +66,7 @@
             {
                 NSDictionary* child = [childrenObj objectAtIndex:i];
                 
-                LocalPredictionTree* childTree = [[[LocalPredictionTree alloc]initWithRoot:child fields:fields objectiveField:objectiveField]autorelease];
+                LocalPredictionTree* childTree = [[LocalPredictionTree alloc]initWithRoot:child fields:fields objectiveField:objectiveField];
                 [children addObject:childTree];
             }
         }
@@ -75,19 +75,6 @@
     return self;
 }
 
--(void)dealloc
-{
-    [root release];
-    [fields release];
-    [objectiveField release];
-    
-    [output release];
-    [confidence release];
-    [children release];
-    
-    self.predicate = nil;
-    [super dealloc];
-}
 
 -(NSDictionary*)predict:(NSDictionary*)inputData
 {
@@ -163,7 +150,7 @@
 	}
     
     //The result of a prediction is the output of the node and the confidence
-    NSMutableDictionary* prediction = [[[NSMutableDictionary alloc]initWithCapacity:2]autorelease];
+    NSMutableDictionary* prediction = [[NSMutableDictionary alloc]initWithCapacity:2];
     
     if(output != nil)
         [prediction setValue:output forKey:@"value"];
