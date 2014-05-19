@@ -10,7 +10,6 @@
 		49559423192A6693006F4D9E /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 49559422192A6693006F4D9E /* Constants.h */; };
 		DC3AE94C1570D0AF008D2F79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3AE94B1570D0AF008D2F79 /* Foundation.framework */; };
 		DC3AE9521570D0B0008D2F79 /* ML4iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3AE9511570D0B0008D2F79 /* ML4iOS.m */; };
-		DC3AE95A1570D0B0008D2F79 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3AE9591570D0B0008D2F79 /* SenTestingKit.framework */; };
 		DC3AE95C1570D0B0008D2F79 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3AE95B1570D0B0008D2F79 /* UIKit.framework */; };
 		DC3AE95D1570D0B0008D2F79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3AE94B1570D0AF008D2F79 /* Foundation.framework */; };
 		DC3AE9601570D0B0008D2F79 /* libML4iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3AE9481570D0AF008D2F79 /* libML4iOS.a */; };
@@ -45,8 +44,7 @@
 		DC3AE94B1570D0AF008D2F79 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DC3AE94F1570D0B0008D2F79 /* ML4iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ML4iOS-Prefix.pch"; sourceTree = "<group>"; };
 		DC3AE9511570D0B0008D2F79 /* ML4iOS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ML4iOS.m; sourceTree = "<group>"; };
-		DC3AE9581570D0B0008D2F79 /* ML4iOSTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ML4iOSTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC3AE9591570D0B0008D2F79 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		DC3AE9581570D0B0008D2F79 /* ML4iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ML4iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC3AE95B1570D0B0008D2F79 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		DC3AE9631570D0B0008D2F79 /* ML4iOSTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ML4iOSTests-Info.plist"; sourceTree = "<group>"; };
 		DC3AE9671570D0B0008D2F79 /* ML4iOSTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ML4iOSTests.h; sourceTree = "<group>"; };
@@ -78,7 +76,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC3AE95A1570D0B0008D2F79 /* SenTestingKit.framework in Frameworks */,
 				DC3AE95C1570D0B0008D2F79 /* UIKit.framework in Frameworks */,
 				DC3AE95D1570D0B0008D2F79 /* Foundation.framework in Frameworks */,
 				DC3AE9601570D0B0008D2F79 /* libML4iOS.a in Frameworks */,
@@ -102,7 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				DC3AE9481570D0AF008D2F79 /* libML4iOS.a */,
-				DC3AE9581570D0B0008D2F79 /* ML4iOSTests.octest */,
+				DC3AE9581570D0B0008D2F79 /* ML4iOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -111,7 +108,6 @@
 			isa = PBXGroup;
 			children = (
 				DC3AE94B1570D0AF008D2F79 /* Foundation.framework */,
-				DC3AE9591570D0B0008D2F79 /* SenTestingKit.framework */,
 				DC3AE95B1570D0B0008D2F79 /* UIKit.framework */,
 			);
 			name = Frameworks;
@@ -243,8 +239,8 @@
 			);
 			name = ML4iOSTests;
 			productName = ML4iOSTests;
-			productReference = DC3AE9581570D0B0008D2F79 /* ML4iOSTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = DC3AE9581570D0B0008D2F79 /* ML4iOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -252,6 +248,7 @@
 		DC3AE93F1570D0AF008D2F79 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastTestingUpgradeCheck = 0510;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "";
 			};
@@ -422,14 +419,13 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ML4iOS/ML4iOS-Prefix.pch";
 				INFOPLIST_FILE = "ML4iOSTests/ML4iOSTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -438,14 +434,13 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ML4iOS/ML4iOS-Prefix.pch";
 				INFOPLIST_FILE = "ML4iOSTests/ML4iOSTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
