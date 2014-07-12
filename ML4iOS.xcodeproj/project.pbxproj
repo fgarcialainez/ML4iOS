@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		DC3AE94C1570D0AF008D2F79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3AE94B1570D0AF008D2F79 /* Foundation.framework */; };
 		DC3AE9521570D0B0008D2F79 /* ML4iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3AE9511570D0B0008D2F79 /* ML4iOS.m */; };
-		DC3AE95A1570D0B0008D2F79 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3AE9591570D0B0008D2F79 /* SenTestingKit.framework */; };
 		DC3AE95C1570D0B0008D2F79 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3AE95B1570D0B0008D2F79 /* UIKit.framework */; };
 		DC3AE95D1570D0B0008D2F79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3AE94B1570D0AF008D2F79 /* Foundation.framework */; };
 		DC3AE9601570D0B0008D2F79 /* libML4iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC3AE9481570D0AF008D2F79 /* libML4iOS.a */; };
@@ -21,7 +20,6 @@
 		DC3AE97D1570D331008D2F79 /* HTTPCommsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DC3AE97B1570D331008D2F79 /* HTTPCommsManager.m */; };
 		DCA20AE21723E93E0019E738 /* Predicate.h in Headers */ = {isa = PBXBuildFile; fileRef = DCA20AE01723E93E0019E738 /* Predicate.h */; };
 		DCA20AE31723E93E0019E738 /* Predicate.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA20AE11723E93E0019E738 /* Predicate.m */; };
-		DCA20AE71723F2A00019E738 /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = DCA20AE51723F29F0019E738 /* Constants.h */; };
 		DCD306BD1723602400CC9364 /* iris.csv in Resources */ = {isa = PBXBuildFile; fileRef = DCD306BC1723602400CC9364 /* iris.csv */; };
 		DCD306C01723715100CC9364 /* LocalPredictiveModel.h in Headers */ = {isa = PBXBuildFile; fileRef = DCD306BE1723715100CC9364 /* LocalPredictiveModel.h */; };
 		DCD306C11723715100CC9364 /* LocalPredictiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCD306BF1723715100CC9364 /* LocalPredictiveModel.m */; };
@@ -44,8 +42,7 @@
 		DC3AE94B1570D0AF008D2F79 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DC3AE94F1570D0B0008D2F79 /* ML4iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ML4iOS-Prefix.pch"; sourceTree = "<group>"; };
 		DC3AE9511570D0B0008D2F79 /* ML4iOS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ML4iOS.m; sourceTree = "<group>"; };
-		DC3AE9581570D0B0008D2F79 /* ML4iOSTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ML4iOSTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC3AE9591570D0B0008D2F79 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		DC3AE9581570D0B0008D2F79 /* ML4iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ML4iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC3AE95B1570D0B0008D2F79 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		DC3AE9631570D0B0008D2F79 /* ML4iOSTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ML4iOSTests-Info.plist"; sourceTree = "<group>"; };
 		DC3AE9671570D0B0008D2F79 /* ML4iOSTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ML4iOSTests.h; sourceTree = "<group>"; };
@@ -57,7 +54,6 @@
 		DC3AE97B1570D331008D2F79 /* HTTPCommsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPCommsManager.m; sourceTree = "<group>"; };
 		DCA20AE01723E93E0019E738 /* Predicate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Predicate.h; sourceTree = "<group>"; };
 		DCA20AE11723E93E0019E738 /* Predicate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Predicate.m; sourceTree = "<group>"; };
-		DCA20AE51723F29F0019E738 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		DCD306BC1723602400CC9364 /* iris.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iris.csv; sourceTree = "<group>"; };
 		DCD306BE1723715100CC9364 /* LocalPredictiveModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalPredictiveModel.h; sourceTree = "<group>"; };
 		DCD306BF1723715100CC9364 /* LocalPredictiveModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalPredictiveModel.m; sourceTree = "<group>"; };
@@ -78,7 +74,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC3AE95A1570D0B0008D2F79 /* SenTestingKit.framework in Frameworks */,
 				DC3AE95C1570D0B0008D2F79 /* UIKit.framework in Frameworks */,
 				DC3AE95D1570D0B0008D2F79 /* Foundation.framework in Frameworks */,
 				DC3AE9601570D0B0008D2F79 /* libML4iOS.a in Frameworks */,
@@ -102,7 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				DC3AE9481570D0AF008D2F79 /* libML4iOS.a */,
-				DC3AE9581570D0B0008D2F79 /* ML4iOSTests.octest */,
+				DC3AE9581570D0B0008D2F79 /* ML4iOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -111,7 +106,6 @@
 			isa = PBXGroup;
 			children = (
 				DC3AE94B1570D0AF008D2F79 /* Foundation.framework */,
-				DC3AE9591570D0B0008D2F79 /* SenTestingKit.framework */,
 				DC3AE95B1570D0B0008D2F79 /* UIKit.framework */,
 			);
 			name = Frameworks;
@@ -160,9 +154,9 @@
 		DC3AE9731570D293008D2F79 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				DC3AE9761570D293008D2F79 /* Constants.h */,
 				DC3AE9741570D293008D2F79 /* ML4iOS.h */,
 				DC3AE9751570D293008D2F79 /* ML4iOSDelegate.h */,
-				DC3AE9761570D293008D2F79 /* Constants.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -178,7 +172,6 @@
 		DCA20AE41723E94B0019E738 /* localpredictions */ = {
 			isa = PBXGroup;
 			children = (
-				DCA20AE51723F29F0019E738 /* Constants.h */,
 				DCD306BE1723715100CC9364 /* LocalPredictiveModel.h */,
 				DCD306BF1723715100CC9364 /* LocalPredictiveModel.m */,
 				DCD306C2172380A700CC9364 /* LocalPredictionTree.h */,
@@ -203,7 +196,6 @@
 				DCD306C01723715100CC9364 /* LocalPredictiveModel.h in Headers */,
 				DCD306C4172380A700CC9364 /* LocalPredictionTree.h in Headers */,
 				DCA20AE21723E93E0019E738 /* Predicate.h in Headers */,
-				DCA20AE71723F2A00019E738 /* Constants.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,8 +235,8 @@
 			);
 			name = ML4iOSTests;
 			productName = ML4iOSTests;
-			productReference = DC3AE9581570D0B0008D2F79 /* ML4iOSTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = DC3AE9581570D0B0008D2F79 /* ML4iOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -252,7 +244,8 @@
 		DC3AE93F1570D0AF008D2F79 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastTestingUpgradeCheck = 0510;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "";
 			};
 			buildConfigurationList = DC3AE9421570D0AF008D2F79 /* Build configuration list for PBXProject "ML4iOS" */;
@@ -336,8 +329,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -351,10 +345,14 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -363,16 +361,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
@@ -413,14 +415,13 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ML4iOS/ML4iOS-Prefix.pch";
 				INFOPLIST_FILE = "ML4iOSTests/ML4iOSTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -429,14 +430,13 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ML4iOS/ML4iOS-Prefix.pch";
 				INFOPLIST_FILE = "ML4iOSTests/ML4iOSTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};

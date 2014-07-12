@@ -19,12 +19,12 @@
  * limitations under the License.
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import "ML4iOSDelegate.h"
 
 @class ML4iOS;
 
-@interface ML4iOSTests : SenTestCase <ML4iOSDelegate>
+@interface ML4iOSTests : XCTestCase <ML4iOSDelegate>
 {
     ML4iOS* apiLibrary;
 }

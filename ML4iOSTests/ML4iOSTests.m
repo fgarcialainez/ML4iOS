@@ -30,8 +30,7 @@
     [super setUp];
     
     // Set-up code here.
-    //apiLibrary = [[ML4iOS alloc]initWithUsername:@"YOUR_BIGML_USERNAME" key:@"YOUR_BIGML_API_KEY" developmentMode:NO];
-    apiLibrary = [[ML4iOS alloc]initWithUsername:@"felixksp" key:@"9236b5c57063074edadc7baa25602a6360fc3872" developmentMode:NO];
+    apiLibrary = [[ML4iOS alloc]initWithUsername:@"YOUR_BIGML_USERNAME" key:@"YOUR_BIGML_API_KEY" developmentMode:NO];
     [apiLibrary setDelegate:self];
 }
 
@@ -55,7 +54,7 @@
     NSString *path = [[NSBundle bundleForClass:[ML4iOSTests class]] pathForResource:@"iris" ofType:@"csv"];
     NSDictionary* dataSource = [apiLibrary createDataSourceWithNameSync:@"iris_source" filePath:path statusCode:&httpStatusCode];
     
-    STAssertEquals(httpStatusCode, HTTP_CREATED, @"Error creating data source from iris.csv");
+    XCTAssertEqual(httpStatusCode, HTTP_CREATED, @"Error creating data source from iris.csv");
     
     if(dataSource != nil && httpStatusCode == HTTP_CREATED)
     {
@@ -71,7 +70,7 @@
         
         NSDictionary* dataSet = [apiLibrary createDataSetWithDataSourceIdSync:sourceId name:@"iris_dataset" statusCode:&httpStatusCode];
         
-        STAssertEquals(httpStatusCode, HTTP_CREATED, @"Error creating dataset from iris_source");
+        XCTAssertEqual(httpStatusCode, HTTP_CREATED, @"Error creating dataset from iris_source");
         
         if(dataSet != nil && httpStatusCode == HTTP_CREATED)
         {
@@ -87,7 +86,7 @@
             
             NSDictionary* model = [apiLibrary createModelWithDataSetIdSync:dataSetId name:@"iris_model" statusCode:&httpStatusCode];
             
-            STAssertEquals(httpStatusCode, HTTP_CREATED, @"Error creating model from iris_dataset");
+            XCTAssertEqual(httpStatusCode, HTTP_CREATED, @"Error creating model from iris_dataset");
             
             if(model != nil && httpStatusCode == HTTP_CREATED)
             {
@@ -103,7 +102,7 @@
                 
                 NSDictionary* prediction = [apiLibrary createPredictionWithModelIdSync:modelId name:@"iris_prediction" inputData:inputDataForPrediction statusCode:&httpStatusCode];
                 
-                STAssertEquals(httpStatusCode, HTTP_CREATED, @"Error creating prediction from iris_model");
+                XCTAssertEqual(httpStatusCode, HTTP_CREATED, @"Error creating prediction from iris_model");
                 
                 if(prediction != nil)
                 {
@@ -131,8 +130,8 @@
         
         NSDictionary* prediction = [apiLibrary createLocalPredictionWithJSONModelSync:irisModel arguments:inputDataForPrediction argsByName:NO];
         
-        STAssertNotNil([prediction objectForKey:@"value"], @"Local Prediction value can't be nil");
-        STAssertNotNil([prediction objectForKey:@"confidence"], @"Local Prediction confidence can't be nil");
+        XCTAssertNotNil([prediction objectForKey:@"value"], @"Local Prediction value can't be nil");
+        XCTAssertNotNil([prediction objectForKey:@"confidence"], @"Local Prediction confidence can't be nil");
         
         NSLog(@"Local Prediction Value = %@", [prediction objectForKey:@"value"]);
         NSLog(@"Local Prediction Confidence = %@", [prediction objectForKey:@"confidence"]);

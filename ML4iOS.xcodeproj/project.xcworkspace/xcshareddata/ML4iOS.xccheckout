@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>43791681-4499-405B-A0F5-A8BEA5124A50</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ML4iOS</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>686D48AA-7060-49FE-BC46-6185651CB25B</key>
+		<string>fgarcialainez_github:fgarcialainez/ML4iOS.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ML4iOS.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>686D48AA-7060-49FE-BC46-6185651CB25B</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>fgarcialainez_github:fgarcialainez/ML4iOS.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>686D48AA-7060-49FE-BC46-6185651CB25B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>686D48AA-7060-49FE-BC46-6185651CB25B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ML4iOS</string>
+		</dict>
+	</array>
+</dict>
+</plist>

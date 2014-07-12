@@ -22,6 +22,21 @@
 #import "Predicate.h"
 #import "Constants.h"
 
+// OP_TYPE
+#define OPTYPE_NUMERIC @"numeric"
+#define OPTYPE_CATEGORICAL @"categorical"
+#define OPTYPE_TEXT @"text"
+#define OPTYPE_DATETIME @"datetime"
+
+// Operators
+#define OPERATOR_LT @"<"
+#define OPERATOR_LE @"<="
+#define OPERATOR_EQ @"="
+#define OPERATOR_NE @"!="
+#define OPERATOR_NE2 @"/="
+#define OPERATOR_GE @">="
+#define OPERATOR_GT @">"
+
 @implementation LocalPredictionTree
 
 @synthesize predicate;

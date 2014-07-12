@@ -297,10 +297,10 @@
         [urlString appendFormat:@"name=%@;", name];
      
     if(offset > 0)
-        [urlString appendFormat:@"offset=%d;", offset];
+        [urlString appendFormat:@"offset=%ld;", (long)offset];
     
     if(limit > 0)
-        [urlString appendFormat:@"limit=%d;", limit];
+        [urlString appendFormat:@"limit=%ld;", (long)limit];
     
     return [self listItemsWithURL:urlString statusCode:code];
 }
@@ -361,10 +361,10 @@
         [urlString appendFormat:@"name=%@;", name];
     
     if(offset > 0)
-        [urlString appendFormat:@"offset=%d;", offset];
+        [urlString appendFormat:@"offset=%ld;", (long)offset];
     
     if(limit > 0)
-        [urlString appendFormat:@"limit=%d;", limit];
+        [urlString appendFormat:@"limit=%ld;", (long)limit];
     
     return [self listItemsWithURL:urlString statusCode:code];
 }
@@ -425,10 +425,10 @@
         [urlString appendFormat:@"name=%@;", name];
     
     if(offset > 0)
-        [urlString appendFormat:@"offset=%d;", offset];
+        [urlString appendFormat:@"offset=%ld;", (long)offset];
     
     if(limit > 0)
-        [urlString appendFormat:@"limit=%d;", limit];
+        [urlString appendFormat:@"limit=%ld;", (long)limit];
     
     return [self listItemsWithURL:urlString statusCode:code];
 }
@@ -495,10 +495,10 @@
         [urlString appendFormat:@"name=%@;", name];
     
     if(offset > 0)
-        [urlString appendFormat:@"offset=%d;", offset];
+        [urlString appendFormat:@"offset=%ld;", (long)offset];
     
     if(limit > 0)
-        [urlString appendFormat:@"limit=%d;", limit];
+        [urlString appendFormat:@"limit=%ld;", (long)limit];
     
     return [self listItemsWithURL:urlString statusCode:code];
 }
