@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DC3AE9571570D0B0008D2F79"
-               BuildableName = "ML4iOSTests.octest"
+               BuildableName = "ML4iOSTests.xctest"
                BlueprintName = "ML4iOSTests"
                ReferencedContainer = "container:ML4iOS.xcodeproj">
             </BuildableReference>

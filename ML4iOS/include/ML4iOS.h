@@ -46,7 +46,7 @@
     /**
      * Delegate used for asynchronous responses
      */
-    id<ML4iOSDelegate> delegate;
+    id<ML4iOSDelegate> __weak delegate;
 }
 
 #pragma mark -
@@ -54,7 +54,7 @@
 /**
  * Property used to set the delegate for asynchronous responses
  */
-@property(nonatomic, assign) id<ML4iOSDelegate> delegate;
+@property(nonatomic, weak) id<ML4iOSDelegate> delegate;
 
 #pragma mark -
 

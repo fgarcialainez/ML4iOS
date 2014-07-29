@@ -101,7 +101,7 @@
     NSError *error = nil;
     NSHTTPURLResponse *response = nil;
     
-    NSMutableURLRequest* request= [[[NSMutableURLRequest alloc] init] autorelease];
+    NSMutableURLRequest* request= [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:url]];
     [request setHTTPMethod:@"POST"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-type"];
@@ -124,7 +124,7 @@
     NSError *error = nil;
     NSHTTPURLResponse *response = nil;
     
-    NSMutableURLRequest* request= [[[NSMutableURLRequest alloc] init] autorelease];
+    NSMutableURLRequest* request= [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:url]];
     [request setHTTPMethod:@"PUT"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-type"];
@@ -145,7 +145,7 @@
     NSError *error = nil;
     NSHTTPURLResponse *response = nil;
     
-    NSMutableURLRequest* request= [[[NSMutableURLRequest alloc] init] autorelease];
+    NSMutableURLRequest* request= [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:url]];
     [request setHTTPMethod:@"DELETE"];
     
@@ -210,9 +210,9 @@
             developmentMode = devMode;
             
             if(developmentMode)
-                apiBaseURL = [[NSString alloc] initWithString:@"https://bigml.io/dev/andromeda"];
+                apiBaseURL = @"https://bigml.io/dev/andromeda";
             else
-                apiBaseURL = [[NSString alloc] initWithString:@"https://bigml.io/andromeda"];
+                apiBaseURL = @"https://bigml.io/andromeda";
                 
             authToken = [[NSString alloc]initWithFormat:@"?username=%@;api_key=%@;", apiUsername, apiKey];
         }
@@ -221,14 +221,6 @@
     return self;
 }
 
--(void)dealloc
-{
-    [apiKey release];
-    [apiUsername release];
-    [authToken release];
-    [apiBaseURL release];
-    [super dealloc];
-}
 
 //*******************************************************************************
 //**************************  DATA SOURCES  *************************************
@@ -244,7 +236,7 @@
     NSMutableString* urlString = [NSMutableString stringWithCapacity:30];
     [urlString appendFormat:@"%@%@", BIGML_IO_DATASOURCE_URL, authToken];
     
-    NSMutableURLRequest* request= [[[NSMutableURLRequest alloc] init] autorelease];
+    NSMutableURLRequest* request= [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"POST"];
     NSString *boundary = @"---------------------------14737809831466499882746641449";

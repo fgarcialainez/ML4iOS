@@ -27,13 +27,5 @@
 @synthesize field;
 @synthesize value;
 
--(void)dealloc
-{
-    self.opType = nil;
-    self.predicateOperator = nil;
-    self.field = nil;
-    self.value = nil;
-    [super dealloc];
-}
 
 @end
