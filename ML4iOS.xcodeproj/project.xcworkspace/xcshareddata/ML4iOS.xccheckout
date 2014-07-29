@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>43791681-4499-405B-A0F5-A8BEA5124A50</string>
+	<string>4C372D57-2D61-49F2-A0F6-E1E5F025C992</string>
 	<key>IDESourceControlProjectName</key>
 	<string>ML4iOS</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>686D48AA-7060-49FE-BC46-6185651CB25B</key>
-		<string>fgarcialainez_github:fgarcialainez/ML4iOS.git</string>
+		<key>07541D05-0759-4F60-8661-AD2413B5CFA3</key>
+		<string>https://github.com/fgarcialainez/ML4iOS.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>ML4iOS.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>686D48AA-7060-49FE-BC46-6185651CB25B</key>
+		<key>07541D05-0759-4F60-8661-AD2413B5CFA3</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>fgarcialainez_github:fgarcialainez/ML4iOS.git</string>
+	<string>https://github.com/fgarcialainez/ML4iOS.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>686D48AA-7060-49FE-BC46-6185651CB25B</string>
+	<string>07541D05-0759-4F60-8661-AD2413B5CFA3</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>686D48AA-7060-49FE-BC46-6185651CB25B</string>
+			<string>07541D05-0759-4F60-8661-AD2413B5CFA3</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ML4iOS</string>
 		</dict>

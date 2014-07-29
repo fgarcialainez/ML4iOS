@@ -22,23 +22,6 @@
 /**
  * Defines constants for HTTP Status codes and RESOURCE Status Codes
  */
-//#ifndef ML4iOS_Constants_h
-//#define ML4iOS_Constants_h
-
-// OP_TYPE
-#define OPTYPE_NUMERIC @"numeric"
-#define OPTYPE_CATEGORICAL @"categorical"
-#define OPTYPE_TEXT @"text"
-#define OPTYPE_DATETIME @"datetime"
-
-// Operators
-#define OPERATOR_LT @"<"
-#define OPERATOR_LE @"<="
-#define OPERATOR_EQ @"="
-#define OPERATOR_NE @"!="
-#define OPERATOR_NE2 @"/="
-#define OPERATOR_GE @">="
-#define OPERATOR_GT @">"
 
 //HTTP Status Codes
 #define HTTP_OK 200
@@ -54,8 +37,7 @@
 #define HTTP_LENGTH_REQUIRED 411
 #define HTTP_INTERNAL_SERVER_ERROR 500
 
-//RESOURCE Status Codes. 
-//A resource can be a data source, dataset, model or prediction
+//RESOURCE Status Codes (A resource can be a data source, dataset, model, prediction, etc)
 #define WAITING 0
 #define QUEUED 1
 #define STARTED 2
@@ -65,5 +47,3 @@
 #define FAULTY -1
 #define UNKNOWN -2
 #define RUNNABLE -3
-
-//#endif
