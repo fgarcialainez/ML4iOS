@@ -78,8 +78,8 @@
 +(NSString*) getResourceIdentifierFromJSONObject:(NSDictionary*)resouce;
 
 //*******************************************************************************
-//*************************** SOURCES  ******************************************
-//************* https://bigml.com/developers/sources ****************************
+//********************************  SOURCES  ************************************
+//****************** https://bigml.com/developers/sources ***********************
 //*******************************************************************************
 
 #pragma mark -
@@ -185,8 +185,8 @@
 -(NSOperation*)checkDataSourceIsReadyWithId:(NSString*)identifier;
 
 //*******************************************************************************
-//*************************** DATASETS  *****************************************
-//************* https://bigml.com/developers/datasets ***************************
+//*********************************  DATASETS  **********************************
+//******************* https://bigml.com/developers/datasets *********************
 //*******************************************************************************
 
 #pragma mark -
@@ -291,8 +291,8 @@
 -(NSOperation*)checkDataSetIsReadyWithId:(NSString*)identifier;
 
 //*******************************************************************************
-//*************************** MODELS  *******************************************
-//************* https://bigml.com/developers/models *****************************
+//*********************************  MODELS  ************************************
+//******************* https://bigml.com/developers/models ***********************
 //*******************************************************************************
 
 #pragma mark -
@@ -341,7 +341,7 @@
 
 /**
  * Deletes a given model. The response is provided in the method modelDeletedWithStatusCode of the delegate.
- * @param identifier The identifier of the dataset to delete
+ * @param identifier The identifier of the model to delete
  * @return The async NSOperation created
  */
 -(NSOperation*)deleteModelWithId:(NSString*)identifier;
@@ -397,8 +397,116 @@
 -(NSOperation*)checkModelIsReadyWithId:(NSString*)identifier;
 
 //*******************************************************************************
-//*************************** PREDICTIONS  **************************************
-//************* https://bigml.com/developers/predictions ************************
+//*********************************  CLUSTERS  **********************************
+//******************* https://bigml.com/developers/clusters *********************
+//*******************************************************************************
+
+#pragma mark -
+#pragma mark Clusters
+
+/**
+ * Creates a cluster from a given dataset.
+ * @param dataSetId The identifier of the dataset
+ * @param name This optional parameter provides the name of the cluster to be created
+ * @param k Number of clusters to create
+ * @param code The HTTP status code returned
+ * @return The model created if success, else nil
+ */
+-(NSDictionary*)createClusterWithDataSetIdSync:(NSString*)dataSetId name:(NSString*)name numberOfClusters:(NSInteger)k statusCode:(NSInteger*)code;
+
+/**
+ * Creates a cluster from a given dataset. The response is provided in the method clusterCreated of the delegate.
+ * @param dataSetId The identifier of the dataset
+ * @param name This optional parameter provides the name of the cluster to be created
+ * @param k Number of clusters to create
+ * @return The async NSOperation created
+ */
+-(NSOperation*)createClusterWithDataSetId:(NSString*)dataSetId name:(NSString*)name numberOfClusters:(NSInteger)k;
+
+/**
+ * Updates the name of a given cluster.
+ * @param identifier The identifier of the cluster to update
+ * @param name The new name of the cluster
+ * @param code The HTTP status code returned
+ * @return The model updated if success, else nil
+ */
+-(NSDictionary*)updateClusterNameWithIdSync:(NSString*)identifier name:(NSString*)name statusCode:(NSInteger*)code;
+
+/**
+ * Updates the name of a given cluster. The response is provided in the method clusterUpdated of the delegate.
+ * @param identifier The identifier of the cluster to update
+ * @param name The new name of the cluster
+ * @return The async NSOperation created
+ */
+-(NSOperation*)updateClusterNameWithId:(NSString*)identifier name:(NSString*)name;
+
+/**
+ * Deletes a given cluster.
+ * @param identifier The identifier of the cluster to delete
+ * @return The HTTP status code returned
+ */
+-(NSInteger)deleteClusterWithIdSync:(NSString*)identifier;
+
+/**
+ * Deletes a given cluster. The response is provided in the method clusterDeletedWithStatusCode of the delegate.
+ * @param identifier The identifier of the cluster to delete
+ * @return The async NSOperation created
+ */
+-(NSOperation*)deleteClusterWithId:(NSString*)identifier;
+
+/**
+ * Get a list of clusters filtered by name.
+ * @param name This optional parameter provides the name of the clusters to be retrieved. If it is nil then will be
+ * retrieved all clusters without any filtering
+ * @param offset The offset to paginate the results
+ * @param limit The maximum number of results
+ * @param code The HTTP status code returned
+ * @return The list of clusters found if success, else nil
+ */
+-(NSDictionary*)getAllClustersWithNameSync:(NSString*)name offset:(NSInteger)offset limit:(NSInteger)limit statusCode:(NSInteger*)code;
+
+/**
+ * Get a list of clusters filtered by name. The response is provided in the method clustersRetrieved of the delegate.
+ * @param name This optional parameter provides the name of the clusters to be retrieved. If it is nil then will be
+ * retrieved all clusters without any filtering
+ * @param offset The offset to paginate the results
+ * @param limit The maximum number of results
+ * @return The async NSOperation created
+ */
+-(NSOperation*)getAllClustersWithName:(NSString*)name offset:(NSInteger)offset limit:(NSInteger)limit;
+
+/**
+ * Get a cluster.
+ * @param identifier The identifier of the cluster to get
+ * @param code The HTTP status code returned
+ * @return The model if success, else nil
+ */
+-(NSDictionary*)getClusterWithIdSync:(NSString*)identifier statusCode:(NSInteger*)code;
+
+/**
+ * Get a model. The response is provided in the method clusterRetrieved of the delegate.
+ * @param identifier The identifier of the cluster to get
+ * @return The async NSOperation created
+ */
+-(NSOperation*)getClusterWithId:(NSString*)identifier;
+
+/**
+ * Check if the status of the cluster is FINISHED.
+ * @param identifier The identifier of the cluster to check the status
+ * @return true if the status of the cluster is FINISHED, else false
+ */
+-(BOOL)checkClusterIsReadyWithIdSync:(NSString*)identifier;
+
+/**
+ * Check if the status of the cluster is FINISHED. The response is provided in the method clusterIsReady of the delegate.
+ * @param identifier The identifier of the cluster to check the status
+ * @return The async NSOperation created
+ */
+-(NSOperation*)checkClusterIsReadyWithId:(NSString*)identifier;
+
+//*******************************************************************************
+//******************************  PREDICTIONS  **********************************
+//****************** https://bigml.com/developers/predictions *******************
 //*******************************************************************************
 
 #pragma mark -
@@ -508,7 +616,7 @@
 
 
 //*******************************************************************************
-//*************************** LOCAL PREDICTIONS  ********************************
+//***************************  LOCAL PREDICTIONS  *******************************
 //*******************************************************************************
 
 #pragma mark -

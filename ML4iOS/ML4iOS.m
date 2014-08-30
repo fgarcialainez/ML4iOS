@@ -39,7 +39,7 @@
 -(NSOperation*)launchOperationWithSelector:(SEL)selector params:(NSObject*)params;
 
 //*******************************************************************************
-//*************************** ASYNC CALLBACKS  **********************************
+//*****************************  ASYNC CALLBACKS  *******************************
 //*******************************************************************************
 
 /**
@@ -76,6 +76,16 @@
 -(void)getAllModelsAction:(NSDictionary*)params;
 -(void)getModelAction:(NSDictionary*)params;
 -(void)checkModelIsReadyAction:(NSDictionary*)params;
+
+#pragma mark -
+#pragma mark Clusters Async Callbacks
+
+-(void)createClusterAction:(NSDictionary*)params;
+-(void)updateClusterAction:(NSDictionary*)params;
+-(void)deleteClusterAction:(NSDictionary*)params;
+-(void)getAllClustersAction:(NSDictionary*)params;
+-(void)getClusterAction:(NSDictionary*)params;
+-(void)checkClusterIsReadyAction:(NSDictionary*)params;
 
 #pragma mark -
 #pragma mark Predictions Async Callbacks
@@ -143,8 +153,8 @@
 }
 
 //*******************************************************************************
-//*************************** SOURCES  ******************************************
-//************* https://bigml.com/developers/sources ****************************
+//********************************  SOURCES  ************************************
+//****************** https://bigml.com/developers/sources ***********************
 //*******************************************************************************
 
 #pragma mark -
@@ -303,8 +313,8 @@
 }
 
 //*******************************************************************************
-//*************************** DATASETS  *****************************************
-//************* https://bigml.com/developers/datasets ***************************
+//*********************************  DATASETS  **********************************
+//******************* https://bigml.com/developers/datasets *********************
 //*******************************************************************************
 
 #pragma mark -
@@ -463,8 +473,8 @@
 }
 
 //*******************************************************************************
-//*************************** MODELS  *******************************************
-//************* https://bigml.com/developers/models *****************************
+//*********************************  MODELS  ************************************
+//******************* https://bigml.com/developers/models ***********************
 //*******************************************************************************
 
 #pragma mark -
@@ -623,8 +633,170 @@
 }
 
 //*******************************************************************************
-//*************************** PREDICTIONS  **************************************
-//************* https://bigml.com/developers/predictions ************************
+//*********************************  CLUSTERS  **********************************
+//******************* https://bigml.com/developers/clusters *********************
+//*******************************************************************************
+
+#pragma mark -
+#pragma mark Clusters
+
+-(NSDictionary*)createClusterWithDataSetIdSync:(NSString*)dataSetId name:(NSString*)name numberOfClusters:(NSInteger)k statusCode:(NSInteger*)code
+{
+    return [commsManager createClusterWithDataSetId:dataSetId name:name numberOfClusters:k statusCode:code];
+}
+
+-(NSOperation*)createClusterWithDataSetId:(NSString*)dataSetId name:(NSString*)name numberOfClusters:(NSInteger)k
+{
+    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:2];
+    params[@"dataSetId"] = dataSetId;
+    params[@"name"] = name;
+    params[@"k"] = [NSNumber numberWithInteger:k];
+    
+    return [self launchOperationWithSelector:@selector(createClusterAction:) params:params];
+}
+
+-(void)createClusterAction:(NSDictionary*)params
+{
+    NSInteger statusCode = 0;
+    NSString* dataSetId = params[@"dataSetId"];
+    NSString* name = params[@"name"];
+    NSInteger k = [params[@"k"]intValue];
+    
+    NSDictionary* cluster = [commsManager createClusterWithDataSetId:dataSetId name:name numberOfClusters:k statusCode:&statusCode];
+    
+    [delegate clusterCreated:cluster statusCode:statusCode];
+}
+
+-(NSDictionary*)updateClusterNameWithIdSync:(NSString*)identifier name:(NSString*)name statusCode:(NSInteger*)code
+{
+    return [commsManager updateClusterNameWithId:identifier name:name statusCode:code];
+}
+
+-(NSOperation*)updateClusterNameWithId:(NSString*)identifier name:(NSString*)name
+{
+    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:2];
+    params[@"identifier"] = identifier;
+    params[@"name"] = name;
+    
+    return [self launchOperationWithSelector:@selector(updateClusterAction:) params:params];
+}
+
+-(void)updateClusterAction:(NSDictionary*)params
+{
+    NSInteger statusCode = 0;
+    NSString* identifier = params[@"identifier"];
+    NSString* name = params[@"name"];
+    
+    NSDictionary* model = [commsManager updateClusterNameWithId:identifier name:name statusCode:&statusCode];
+    
+    [delegate clusterUpdated:model statusCode:statusCode];
+}
+
+-(NSInteger)deleteClusterWithIdSync:(NSString*)identifier
+{
+    return [commsManager deleteClusterWithId:identifier];
+}
+
+-(NSOperation*)deleteClusterWithId:(NSString*)identifier
+{
+    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:1];
+    params[@"identifier"] = identifier;
+    
+    return [self launchOperationWithSelector:@selector(deleteClusterAction:) params:params];
+}
+
+-(void)deleteClusterAction:(NSDictionary*)params
+{
+    NSInteger statusCode = [commsManager deleteClusterWithId:params[@"identifier"]];
+    
+    [delegate clusterDeletedWithStatusCode:statusCode];
+}
+
+-(NSDictionary*)getAllClustersWithNameSync:(NSString*)name offset:(NSInteger)offset limit:(NSInteger)limit statusCode:(NSInteger*)code
+{
+    return [commsManager getAllClustersWithName:name offset:offset limit:limit statusCode:code];
+}
+
+-(NSOperation*)getAllClustersWithName:(NSString*)name offset:(NSInteger)offset limit:(NSInteger)limit
+{
+    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:3];
+    params[@"name"] = name;
+    params[@"offset"] = @(offset);
+    params[@"limit"] = @(limit);
+    
+    return [self launchOperationWithSelector:@selector(getAllClustersAction:) params:params];
+}
+
+-(void)getAllClustersAction:(NSDictionary*)params
+{
+    NSInteger statusCode = 0;
+    NSString* name = params[@"name"];
+    NSInteger offset = [params[@"offset"]integerValue];
+    NSInteger limit = [params[@"limit"]integerValue];
+    
+    NSDictionary* clusters = [commsManager getAllClustersWithName:name offset:offset limit:limit statusCode:&statusCode];
+    
+    [delegate clustersRetrieved:clusters statusCode:statusCode];
+}
+
+-(NSDictionary*)getClusterWithIdSync:(NSString*)identifier statusCode:(NSInteger*)code
+{
+    return [commsManager getClusterWithId:identifier statusCode:code];
+}
+
+-(NSOperation*)getClusterWithId:(NSString*)identifier
+{
+    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:1];
+    params[@"identifier"] = identifier;
+    
+    return [self launchOperationWithSelector:@selector(getClusterAction:) params:params];
+}
+
+-(void)getClusterAction:(NSDictionary*)params
+{
+    NSInteger statusCode = 0;
+    NSDictionary* cluster = [commsManager getClusterWithId:params[@"identifier"] statusCode:&statusCode];
+    
+    [delegate clusterRetrieved:cluster statusCode:statusCode];
+}
+
+-(BOOL)checkClusterIsReadyWithIdSync:(NSString*)identifier
+{
+    BOOL ready = NO;
+    
+    NSInteger statusCode = 0;
+    NSDictionary* cluster = [commsManager getClusterWithId:identifier statusCode:&statusCode];
+    
+    if(cluster != nil && statusCode == HTTP_OK)
+        ready = [cluster[@"status"][@"code"]intValue] == FINISHED;
+    
+    return ready;
+}
+
+-(NSOperation*)checkClusterIsReadyWithId:(NSString*)identifier
+{
+    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithCapacity:3];
+    params[@"identifier"] = identifier;
+    
+    return [self launchOperationWithSelector:@selector(checkClusterIsReadyAction:) params:params];
+}
+
+-(void)checkClusterIsReadyAction:(NSDictionary*)params
+{
+    BOOL ready = NO;
+    
+    NSInteger statusCode = 0;
+    NSDictionary* cluster = [commsManager getModelWithId:params[@"identifier"] statusCode:&statusCode];
+    
+    if(cluster != nil && statusCode == HTTP_OK)
+        ready = [cluster[@"status"][@"code"]intValue] == FINISHED;
+    
+    [delegate clusterIsReady:ready];
+}
+
+//*******************************************************************************
+//******************************  PREDICTIONS  **********************************
+//****************** https://bigml.com/developers/predictions *******************
 //*******************************************************************************
 
 #pragma mark -
@@ -785,7 +957,7 @@
 }
 
 //*******************************************************************************
-//*************************** LOCAL PREDICTIONS  ********************************
+//***************************  LOCAL PREDICTIONS  *******************************
 //*******************************************************************************
 
 #pragma mark -

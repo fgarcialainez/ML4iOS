@@ -28,6 +28,7 @@
 #define BIGML_IO_DATASOURCE_URL [NSString stringWithFormat:@"%@/source", apiBaseURL]
 #define BIGML_IO_DATASET_URL [NSString stringWithFormat:@"%@/dataset", apiBaseURL]
 #define BIGML_IO_MODEL_URL [NSString stringWithFormat:@"%@/model", apiBaseURL]
+#define BIGML_IO_CLUSTER_URL [NSString stringWithFormat:@"%@/cluster", apiBaseURL]
 #define BIGML_IO_PREDICTION_URL [NSString stringWithFormat:@"%@/prediction", apiBaseURL]
 
 #pragma mark -
@@ -88,7 +89,7 @@
 @implementation HTTPCommsManager
 
 //*******************************************************************************
-//**************************  PRIVATE METHODS  **********************************
+//*****************************  PRIVATE METHODS  *******************************
 //*******************************************************************************
 
 #pragma mark -
@@ -193,7 +194,7 @@
 }
 
 //*******************************************************************************
-//**************************  INITIALIZERS  *************************************
+//*******************************  INITIALIZER  *********************************
 //*******************************************************************************
 
 #pragma mark -
@@ -221,9 +222,8 @@
     return self;
 }
 
-
 //*******************************************************************************
-//**************************  DATA SOURCES  *************************************
+//******************************  DATA SOURCES  *********************************
 //*******************************************************************************
 
 #pragma mark -
@@ -305,7 +305,7 @@
 }
 
 //*******************************************************************************
-//**************************  DATASETS  *****************************************
+//*******************************  DATASETS  ************************************
 //*******************************************************************************
 
 #pragma mark -
@@ -369,18 +369,18 @@
 }
 
 //*******************************************************************************
-//**************************  MODELS  *******************************************
+//*********************************  MODELS  ************************************
 //*******************************************************************************
 
 #pragma mark -
 #pragma mark Models
 
--(NSDictionary*)createModelWithDataSetId:(NSString*)sourceId name:(NSString*)name statusCode:(NSInteger*)code
+-(NSDictionary*)createModelWithDataSetId:(NSString*)dataSetId name:(NSString*)name statusCode:(NSInteger*)code
 {
     NSString* urlString = [NSString stringWithFormat:@"%@%@", BIGML_IO_MODEL_URL, authToken];
     
     NSMutableString* bodyString = [NSMutableString stringWithCapacity:30];
-    [bodyString appendFormat:@"{\"dataset\":\"dataset/%@\"", sourceId];
+    [bodyString appendFormat:@"{\"dataset\":\"dataset/%@\"", dataSetId];
     
     if([name length] > 0)
         [bodyString appendFormat:@", \"name\":\"%@\"}", name];
@@ -433,7 +433,72 @@
 }
 
 //*******************************************************************************
-//**************************  PREDICTIONS  **************************************
+//********************************  CLUSTERS  ***********************************
+//*******************************************************************************
+
+#pragma mark -
+#pragma mark Clusters
+
+-(NSDictionary*)createClusterWithDataSetId:(NSString*)dataSetId name:(NSString*)name numberOfClusters:(NSInteger)k statusCode:(NSInteger*)code
+{
+    NSString* urlString = [NSString stringWithFormat:@"%@%@", BIGML_IO_CLUSTER_URL, authToken];
+    
+    NSMutableString* bodyString = [NSMutableString stringWithCapacity:30];
+    [bodyString appendFormat:@"{\"dataset\":\"dataset/%@\"", dataSetId];
+    
+    if([name length] > 0)
+        [bodyString appendFormat:@", \"name\":\"%@\"", name];
+    
+    [bodyString appendFormat:@", \"k\":%ld", k];
+    [bodyString appendString:@"}"];
+    
+    return [self createItemWithURL:urlString body:bodyString statusCode:code];
+    
+}
+
+-(NSDictionary*)updateClusterNameWithId:(NSString*)identifier name:(NSString*)name statusCode:(NSInteger*)code
+{
+    NSString* urlString = [NSString stringWithFormat:@"%@/%@%@", BIGML_IO_CLUSTER_URL, identifier, authToken];
+    
+    NSMutableString* bodyString = [NSMutableString stringWithCapacity:30];
+    [bodyString appendFormat:@"{\"name\":\"%@\"}", name];
+    
+    return [self updateItemWithURL:urlString body:bodyString statusCode:code];
+}
+
+-(NSInteger)deleteClusterWithId:(NSString*)identifier
+{
+    NSString* urlString = [NSString stringWithFormat:@"%@/%@%@", BIGML_IO_CLUSTER_URL, identifier, authToken];
+    
+    return [self deleteItemWithURL:urlString];
+}
+
+-(NSDictionary*)getAllClustersWithName:(NSString*)name offset:(NSInteger)offset limit:(NSInteger)limit statusCode:(NSInteger*)code
+{
+    NSMutableString* urlString = [NSMutableString stringWithCapacity:30];
+    [urlString appendFormat:@"%@%@", BIGML_IO_CLUSTER_URL, authToken];
+    
+    if([name length] > 0)
+        [urlString appendFormat:@"name=%@;", name];
+    
+    if(offset > 0)
+        [urlString appendFormat:@"offset=%ld;", (long)offset];
+    
+    if(limit > 0)
+        [urlString appendFormat:@"limit=%ld;", (long)limit];
+    
+    return [self listItemsWithURL:urlString statusCode:code];
+}
+
+-(NSDictionary*)getClusterWithId:(NSString*)identifier statusCode:(NSInteger*)code
+{
+    NSString* urlString = [NSString stringWithFormat:@"%@/%@%@", BIGML_IO_CLUSTER_URL, identifier, authToken];
+    
+    return [self getItemWithURL:urlString statusCode:code];
+}
+
+//*******************************************************************************
+//*******************************  PREDICTIONS  *********************************
 //*******************************************************************************
 
 #pragma mark -

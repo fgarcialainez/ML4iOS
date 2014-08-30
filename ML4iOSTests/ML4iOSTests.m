@@ -30,7 +30,7 @@
     [super setUp];
     
     // Set-up code here.
-    apiLibrary = [[ML4iOS alloc]initWithUsername:@"YOUR_BIGML_USERNAME" key:@"YOUR_BIGML_API_KEY" developmentMode:NO];
+    apiLibrary = [[ML4iOS alloc]initWithUsername:@"felixksp" key:@"9236b5c57063074edadc7baa25602a6360fc3872" developmentMode:NO];
     [apiLibrary setDelegate:self];
 }
 
@@ -116,9 +116,25 @@
                     NSLog(@"Prediction iris_prediction Created and Ready");
                 }
             }
+            
+            NSDictionary* cluster = [apiLibrary createClusterWithDataSetIdSync:dataSetId name:@"iris_cluster" numberOfClusters:5 statusCode:&httpStatusCode];
+            
+            XCTAssertEqual(httpStatusCode, HTTP_CREATED, @"Error creating cluster from iris_dataset");
+            
+            if(cluster != nil && httpStatusCode == HTTP_CREATED)
+            {
+                //EXTRACT MODEL ID AND CREATE PREDICTION FROM THAT MODEL
+                NSString* clusterId = [ML4iOS getResourceIdentifierFromJSONObject:cluster];
+                
+                //WAIT UNTIL CLUSTER IS READY
+                while (![apiLibrary checkClusterIsReadyWithIdSync:clusterId]) {
+                    sleep(3);
+                }
+                
+                NSLog(@"Cluster iris_cluster Created and Ready");
+            }
         }
     }
-    
     
     if([modelId length] > 0)
     {
@@ -142,117 +158,118 @@
 
 -(void)dataSourceCreated:(NSDictionary*)dataSource statusCode:(NSInteger)code
 {
-    
 }
 
 -(void)dataSourceUpdated:(NSDictionary*)dataSource statusCode:(NSInteger)code
 {
-    
 }
 
 -(void)dataSourceDeletedWithStatusCode:(NSInteger)code
 {
-    
 }
 
 -(void)dataSourcesRetrieved:(NSDictionary*)dataSources statusCode:(NSInteger)code
 {
-    
 }
 
 -(void)dataSourceRetrieved:(NSDictionary*)dataSource statusCode:(NSInteger)code
 {
-    
 }
 
 -(void)dataSourceIsReady:(BOOL)ready
 {
-    
 }
 
 -(void)dataSetCreated:(NSDictionary*)dataSet statusCode:(NSInteger)code
 {
-    
 }
 
 -(void)dataSetUpdated:(NSDictionary*)dataSet statusCode:(NSInteger)code
 {
-    
 }
 
 -(void)dataSetDeletedWithStatusCode:(NSInteger)code
 {
-    
 }
 
 -(void)dataSetsRetrieved:(NSDictionary*)dataSets statusCode:(NSInteger)code
 {
-    
 }
 
 -(void)dataSetRetrieved:(NSDictionary*)dataSet statusCode:(NSInteger)code
 {
-    
 }
 
 -(void)dataSetIsReady:(BOOL)ready
 {
-    
 }
 
 -(void)modelCreated:(NSDictionary*)model statusCode:(NSInteger)code
 {
-    
 }
 
 -(void)modelUpdated:(NSDictionary*)model statusCode:(NSInteger)code
 {
-    
 }
 
 -(void)modelDeletedWithStatusCode:(NSInteger)code
 {
-    
 }
 
 -(void)modelsRetrieved:(NSDictionary*)models statusCode:(NSInteger)code
 {
-    
 }
 
 -(void)modelRetrieved:(NSDictionary*)model statusCode:(NSInteger)code
 {
-    
 }
 
 -(void)modelIsReady:(BOOL)ready
 {
-    
+}
+
+-(void)clusterCreated:(NSDictionary*)cluster statusCode:(NSInteger)code
+{
+}
+
+-(void)clusterUpdated:(NSDictionary*)cluster statusCode:(NSInteger)code
+{
+}
+
+-(void)clusterDeletedWithStatusCode:(NSInteger)code
+{
+}
+
+-(void)clustersRetrieved:(NSDictionary*)clusters statusCode:(NSInteger)code
+{
+}
+
+-(void)clusterRetrieved:(NSDictionary*)cluster statusCode:(NSInteger)code
+{
+}
+
+-(void)clusterIsReady:(BOOL)ready
+{
 }
 
 -(void)predictionCreated:(NSDictionary*)prediction statusCode:(NSInteger)code
 {
-    
 }
 
 -(void)predictionUpdated:(NSDictionary*)prediction statusCode:(NSInteger)code
 {
-    
 }
 
 -(void)predictionDeletedWithStatusCode:(NSInteger)code
 {
-    
 }
 
 -(void)predictionsRetrieved:(NSDictionary*)predictions statusCode:(NSInteger)code
 {
-    
 }
 
 -(void)predictionRetrieved:(NSDictionary*)prediction statusCode:(NSInteger)code
 {
-    
 }
 
 -(void)predictionIsReady:(BOOL)ready

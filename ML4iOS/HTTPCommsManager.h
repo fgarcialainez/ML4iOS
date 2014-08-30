@@ -54,7 +54,7 @@
 }
 
 //*******************************************************************************
-//**************************  INITIALIZER  **************************************
+//*******************************  INITIALIZER  *********************************
 //*******************************************************************************
 
 #pragma mark -
@@ -69,7 +69,7 @@
 -(HTTPCommsManager*)initWithUsername:(NSString*)username key:(NSString*)key developmentMode:(BOOL)devMode;
 
 //*******************************************************************************
-//**************************  DATA SOURCES  *************************************
+//******************************  DATA SOURCES  *********************************
 //*******************************************************************************
 
 #pragma mark -
@@ -120,7 +120,7 @@
 -(NSDictionary*)getDataSourceWithId:(NSString*)identifier statusCode:(NSInteger*)code;
 
 //*******************************************************************************
-//**************************  DATASETS  *****************************************
+//*******************************  DATASETS  ************************************
 //*******************************************************************************
 
 #pragma mark -
@@ -171,7 +171,7 @@
 -(NSDictionary*)getDataSetWithId:(NSString*)identifier statusCode:(NSInteger*)code;
 
 //*******************************************************************************
-//**************************  MODELS  *******************************************
+//*********************************  MODELS  ************************************
 //*******************************************************************************
 
 #pragma mark -
@@ -222,7 +222,59 @@
 -(NSDictionary*)getModelWithId:(NSString*)identifier statusCode:(NSInteger*)code;
 
 //*******************************************************************************
-//**************************  PREDICTIONS  **************************************
+//********************************  CLUSTERS  ***********************************
+//*******************************************************************************
+
+#pragma mark -
+#pragma mark Clusters
+
+/**
+ * Creates a cluster from a given dataset.
+ * @param dataSetId The identifier of the dataset
+ * @param name This optional parameter provides the name of the cluster to be created
+ * @param k Number of clusters to create
+ * @param code The HTTP status code returned
+ * @return The model created if success, else nil
+ */
+-(NSDictionary*)createClusterWithDataSetId:(NSString*)dataSetId name:(NSString*)name numberOfClusters:(NSInteger)k statusCode:(NSInteger*)code;
+
+/**
+ * Updates the name of a given cluster.
+ * @param identifier The identifier of the cluster to update
+ * @param name The new name of the cluster
+ * @param code The HTTP status code returned
+ * @return The model updated if success, else nil
+ */
+-(NSDictionary*)updateClusterNameWithId:(NSString*)identifier name:(NSString*)name statusCode:(NSInteger*)code;
+
+/**
+ * Deletes a given cluster.
+ * @param identifier The identifier of the cluster to delete
+ * @return The HTTP status code returned
+ */
+-(NSInteger)deleteClusterWithId:(NSString*)identifier;
+
+/**
+ * Get a list of clusters filtered by name.
+ * @param name This optional parameter provides the name of the clusters to be retrieved. If it is nil then will be
+ * retrieved all models without any filtering
+ * @param offset The offset to paginate the results
+ * @param limit The maximum number of results
+ * @param code The HTTP status code returned
+ * @return The list of models found if success, else nil
+ */
+-(NSDictionary*)getAllClustersWithName:(NSString*)name offset:(NSInteger)offset limit:(NSInteger)limit statusCode:(NSInteger*)code;
+
+/**
+ * Get a cluster.
+ * @param identifier The identifier of the cluster to get
+ * @param code The HTTP status code returned
+ * @return The model if success, else nil
+ */
+-(NSDictionary*)getClusterWithId:(NSString*)identifier statusCode:(NSInteger*)code;
+
+//*******************************************************************************
+//*******************************  PREDICTIONS  *********************************
 //*******************************************************************************
 
 #pragma mark -
