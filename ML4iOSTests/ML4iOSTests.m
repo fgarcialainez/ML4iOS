@@ -30,7 +30,7 @@
     [super setUp];
     
     // Set-up code here.
-    apiLibrary = [[ML4iOS alloc]initWithUsername:@"BIGML_API_USERNAME" key:@"BIGML_API_KEY" developmentMode:NO];
+    apiLibrary = [[ML4iOS alloc]initWithUsername:@"felixksp" key:@"9236b5c57063074edadc7baa25602a6360fc3872" developmentMode:NO];
     [apiLibrary setDelegate:self];
 }
 
@@ -51,9 +51,9 @@
     
     //CREATES A DATA SOURCE FROM A .CSV
     NSString *path = [[NSBundle bundleForClass:[ML4iOSTests class]] pathForResource:@"iris" ofType:@"csv"];
-    NSDictionary* dataSource = [apiLibrary createDataSourceWithNameSync:@"iris_source" filePath:path statusCode:&httpStatusCode];
+    NSDictionary* dataSource = [apiLibrary createDataSourceWithNameSync:@"iris_datasource" filePath:path statusCode:&httpStatusCode];
     
-    XCTAssertEqual(httpStatusCode, HTTP_CREATED, @"Error creating data source from iris.csv");
+    XCTAssertEqual(httpStatusCode, HTTP_CREATED, @"Error creating datasource iris_datasource");
     
     if(dataSource != nil && httpStatusCode == HTTP_CREATED)
     {
@@ -65,27 +65,27 @@
             sleep(1);
         }
         
-        NSLog(@"Data Source iris_source Created and Ready");
+        NSLog(@"Datasource iris_source created and ready");
         
         NSDictionary* dataSet = [apiLibrary createDataSetWithDataSourceIdSync:sourceId name:@"iris_dataset" statusCode:&httpStatusCode];
         
-        XCTAssertEqual(httpStatusCode, HTTP_CREATED, @"Error creating dataset from iris_source");
+        XCTAssertEqual(httpStatusCode, HTTP_CREATED, @"Error creating dataset from iris_dataset");
         
         if(dataSet != nil && httpStatusCode == HTTP_CREATED)
         {
             //EXTRACT DATASET ID AND CREATE MODEL FROM THAT DATASET
             NSString* dataSetId = [ML4iOS getResourceIdentifierFromJSONObject:dataSet];
             
-            //WAIT UNTIL DATA SOURCE IS READY
+            //WAIT UNTIL DATA SET IS READY
             while (![apiLibrary checkDataSetIsReadyWithIdSync:dataSetId]) {
                 sleep(3);
             }
             
-            NSLog(@"DataSet iris_dataset Created and Ready");
+            NSLog(@"Dataset iris_dataset created and ready");
             
             NSDictionary* model = [apiLibrary createModelWithDataSetIdSync:dataSetId name:@"iris_model" statusCode:&httpStatusCode];
             
-            XCTAssertEqual(httpStatusCode, HTTP_CREATED, @"Error creating model from iris_dataset");
+            XCTAssertEqual(httpStatusCode, HTTP_CREATED, @"Error creating model iris_model");
             
             if(model != nil && httpStatusCode == HTTP_CREATED)
             {
@@ -97,15 +97,14 @@
                     sleep(3);
                 }
                 
-                NSLog(@"Model iris_model Created and Ready");
+                NSLog(@"Model iris_model created and ready");
                 
                 NSDictionary* prediction = [apiLibrary createPredictionWithModelIdSync:modelId name:@"iris_prediction" inputData:inputDataForPrediction statusCode:&httpStatusCode];
                 
-                XCTAssertEqual(httpStatusCode, HTTP_CREATED, @"Error creating prediction from iris_model");
+                XCTAssertEqual(httpStatusCode, HTTP_CREATED, @"Error creating prediction iris_prediction");
                 
                 if(prediction != nil)
                 {
-                    //EXTRACT MODEL ID AND CREATE PREDICTION FROM THAT MODEL
                     NSString* predictionId = [ML4iOS getResourceIdentifierFromJSONObject:prediction];
                     
                     //WAIT UNTIL PREDICTION IS READY
@@ -113,17 +112,22 @@
                         sleep(1);
                     }
                     
-                    NSLog(@"Prediction iris_prediction Created and Ready");
+                    NSLog(@"Prediction iris_prediction created and ready");
+                    
+                    //DELETE PREDICTION
+                    XCTAssertEqual([apiLibrary deletePredictionWithIdSync:predictionId], HTTP_NO_CONTENT, @"Error deleting prediction iris_prediciton");
+                    
+                    NSLog(@"Prediction iris_prediciton deleted");
                 }
             }
             
+            //CREATE CLUSTER FROM DATASET ID
             NSDictionary* cluster = [apiLibrary createClusterWithDataSetIdSync:dataSetId name:@"iris_cluster" numberOfClusters:5 statusCode:&httpStatusCode];
             
-            XCTAssertEqual(httpStatusCode, HTTP_CREATED, @"Error creating cluster from iris_dataset");
+            XCTAssertEqual(httpStatusCode, HTTP_CREATED, @"Error creating cluster iris_cluster");
             
             if(cluster != nil && httpStatusCode == HTTP_CREATED)
             {
-                //EXTRACT MODEL ID AND CREATE PREDICTION FROM THAT MODEL
                 NSString* clusterId = [ML4iOS getResourceIdentifierFromJSONObject:cluster];
                 
                 //WAIT UNTIL CLUSTER IS READY
@@ -131,9 +135,24 @@
                     sleep(3);
                 }
                 
-                NSLog(@"Cluster iris_cluster Created and Ready");
+                NSLog(@"Cluster iris_cluster created and ready");
+                
+                //DELETE CLUSTER
+                XCTAssertEqual([apiLibrary deleteClusterWithIdSync:clusterId], HTTP_NO_CONTENT, @"Error deleting cluster iris_cluster");
+                
+                NSLog(@"Cluster iris_cluster deleted");
             }
+            
+            //DELETE DATASET
+            XCTAssertEqual([apiLibrary deleteDataSetWithIdSync:dataSetId], HTTP_NO_CONTENT, @"Error deleting dataset iris_dataset");
+        
+            NSLog(@"Dataset iris_dataset deleted");
         }
+        
+        //DELETE DATASOURCE
+        XCTAssertEqual([apiLibrary deleteDataSourceWithIdSync:sourceId], HTTP_NO_CONTENT, @"Error deleting datasource iris_datasource");
+        
+        NSLog(@"Datasource iris_datasource deleted");
     }
     
     if([modelId length] > 0)
@@ -151,6 +170,11 @@
         NSLog(@"Local Prediction Value = %@", [prediction objectForKey:@"value"]);
         NSLog(@"Local Prediction Confidence = %@", [prediction objectForKey:@"confidence"]);
     }
+    
+    //DELETE MODEL
+    XCTAssertEqual([apiLibrary deleteModelWithIdSync:modelId], HTTP_NO_CONTENT, @"Error deleting model from iris_model");
+    
+    NSLog(@"Model iris_model deleted");
 }
 
 #pragma mark -
