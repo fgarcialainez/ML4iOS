@@ -449,7 +449,7 @@
     if([name length] > 0)
         [bodyString appendFormat:@", \"name\":\"%@\"", name];
     
-    [bodyString appendFormat:@", \"k\":%ld", k];
+    [bodyString appendFormat:@", \"k\":%ld", (long)k];
     [bodyString appendString:@"}"];
     
     return [self createItemWithURL:urlString body:bodyString statusCode:code];
