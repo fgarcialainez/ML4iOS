@@ -82,6 +82,8 @@
  */
 -(NSDictionary*)listItemsWithURL:(NSString*)url statusCode:(NSInteger*)code;
 
+- (NSData *)sendSynchronousRequest:(NSURLRequest*)request returningResponse:(NSURLResponse**)response error:(NSError **)error;
+
 @end
 
 #pragma mark -
@@ -91,6 +93,33 @@
 //*******************************************************************************
 //*****************************  PRIVATE METHODS  *******************************
 //*******************************************************************************
+
+#pragma mark -
+#pragma mark Helper Methods
+
+- (NSData *)sendSynchronousRequest:(NSURLRequest *)request returningResponse:(NSURLResponse **)response error:(NSError **)error {
+    NSError __block *err = NULL;
+    NSData __block *data;
+    BOOL __block reqProcessed = false;
+    NSURLResponse __block *resp;
+
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable _data, NSURLResponse * _Nullable _response, NSError * _Nullable _error) {
+        resp = _response;
+        err = _error;
+        data = _data;
+        reqProcessed = true;
+    }] resume];
+
+    while (!reqProcessed) {
+        [NSThread sleepForTimeInterval:0.02];
+    }
+    
+    if (response != nil)
+        *response = resp;
+    if (error != nil)
+        *error = err;
+    return data;
+}
 
 #pragma mark -
 #pragma mark Generic Methods
@@ -108,7 +137,7 @@
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-type"];
     [request setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
     
-    NSData* responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    NSData* responseData = [self sendSynchronousRequest:request returningResponse:&response error:&error];
     
     *code = [response statusCode];
     
@@ -131,7 +160,7 @@
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-type"];
     [request setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
     
-    NSData* responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    NSData* responseData = [self sendSynchronousRequest:request returningResponse:&response error:&error];
     
     *code = [response statusCode];
     
@@ -150,7 +179,7 @@
     [request setURL:[NSURL URLWithString:url]];
     [request setHTTPMethod:@"DELETE"];
     
-    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    [self sendSynchronousRequest:request returningResponse:&response error:&error];
     
     return [response statusCode];
 }
@@ -164,7 +193,7 @@
     
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     
-    NSData* responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    NSData* responseData = [self sendSynchronousRequest:request returningResponse:&response error:&error];
     
     *code = [response statusCode];
     
@@ -183,7 +212,7 @@
     
     NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     
-    NSData* responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    NSData* responseData = [self sendSynchronousRequest:request returningResponse:&response error:&error];
     
     *code = [response statusCode];
     
@@ -253,7 +282,7 @@
     NSError *error = nil;
     NSHTTPURLResponse *response = nil;
     
-    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    NSData *responseData = [self sendSynchronousRequest:request returningResponse:&response error:&error];
     
     *code = [response statusCode];
     
